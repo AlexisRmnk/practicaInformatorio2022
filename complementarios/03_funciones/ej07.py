@@ -15,4 +15,8 @@
 #  que lea 3 longitudes del usuario y muestre el comportamiento
 #  de esta función.
 
+# condicion: dados x, y ,z que x >= y && z
 
+print("Ingrese 3 logitudes: ")
+lenght1 = float(input("Longitud 1: "))
+lenght2 = float(input("Longitud 2: "))

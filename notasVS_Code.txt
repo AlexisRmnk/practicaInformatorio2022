@@ -1,0 +1,2 @@
+Abrir vs code desde la terminal con "code ."
+Paleta de comandos con CTRL + P
