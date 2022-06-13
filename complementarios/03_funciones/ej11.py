@@ -12,7 +12,7 @@
 # __all__ = ['']
 
 def _its_prime(number_):
-    if number_ < 3:
+    if number_ < 2:
         return False
     for n in range(2, number_):
         if number_%n == 0:
