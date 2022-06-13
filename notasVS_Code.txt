@@ -1,2 +1,66 @@
+https://www.youtube.com/watch?v=E9vvELwvVG0&ab_channel=Code2020
+https://www.youtube.com/watch?v=ifTF3ags0XI
+
 Abrir vs code desde la terminal con "code ."
+
 Paleta de comandos con CTRL + P
+    ">" para buscar todos los COMANDOS (o CTRL + SHIFT + P)
+    "nombre_archivo" para buscar y abrir otros archivos
+    "@" para buscar variables, etc
+    "CTRL + SHIFT + . para navegar por las variables y funciones de un archivos
+    "#" para encontrar referencias a simbolos (variables, funcionones, CLASES) 
+        en mi propio codigo y en sus dependencias (busca en todos los archivos!)
+        usar INICIALES EN MAYUSCULAS para buscar CLASES
+
+    usar ":numero_linea_codigo" para 'parase' sobre una linea y luego
+        SHIFT + <-- / --> para seleccionar codigo  o 
+        CTRL + SHIFT <-- / --> para seleccionar codigo mas rapido
+    
+CTRL + D (varias veces!) para cambiarle el nombre a varias variables a la vez, 
+    o editar varios segmentos de codiios iguales! (Multi Line Editing)
+    Usar CTRL + U para deseleccionar ultima variable repetida seleccionada
+        o "> Cursor Undo" para deshacer (desde la terminal) y
+             "> Cursor Redo" para rehacer
+"> select all ocurrences of find match" puede ser util tambien
+    CTRL + SHIT + L
+
+
+ALT + CLICK ayuda a escribir en distintas partes del codigo A LA VEZ  (Multi Cursor)
+    Combinar con copy/paste de filas de numeros para agregar variables a lineas que
+    repitan mucho codigo!!
+    
+    hacer click en un luegar y luego
+    hacer ALT + SHIFT + CLICK para editar un BLOQUE con multiples cursores a la vez
+        test1 
+        test2
+        test3
+        1
+        2
+        3
+crear multiples cursores a partir de uno, para casos como el anterior.
+("add cursor above / below" command)
+Yo edite en mi editor de VS code para cambiar los keybindings de esas funciones
+    usar CTRL + < + FLECHA_ARRIBA   y lo mismo con  FLECHA_ABAJO
+    de ahi, usar felchas izq y derecha para desplazarse en copias del mismo texto
+
+   
+
+CTRL + X sobre una linea de codigo la corta (sin necesidad de seleccionarla)
+ALT + FLECHA_ARRIBA / ALT + FLECHA_ABAJO ayuda a mover lineas enteras
+    de codigo sin complicaciones.
+    Si agregamos SHIFT podemos COPIAR ESAS lineas
+
+CTRL + L ayuda a subrayar multiples lineas a la vez.
+        CTRL + / (o CTRL + K + C) ayuda a comentar lineas 
+            enteras (anteriormente seleccionadas)
+
+CTRL + Ñ para activar terminal
+
+test1 = 1 lol 1  1 1 1 1 1 
+test2 = 2 lol 2  2 2 2 2 2
+test3 = 3 lol 3  3 3 3 3 3
+test4 = 4 lol 4  4 4 4 4 4
+1
+2
+3
+4

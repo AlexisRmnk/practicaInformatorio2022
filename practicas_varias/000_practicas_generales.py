@@ -1,3 +1,5 @@
+# camel_case para Clases - MAYUSCULAS para constantes - snake_case para todo lo demas
+
 #guardar dato de entrada teclado en variable
 nombre = input("INGRESE SU NOMBRE: ")
 
@@ -117,8 +119,8 @@ elif(condicion_falsa):
 # Sentencia WHILE
 cont = 0
 suma = 0
-N = int(input('Ingrese tope maximo: '))
-while (cont <= N):
+n = int(input('Ingrese tope maximo: '))
+while (cont <= n):
     suma = suma + cont
     cont = cont + 1
 print('La suma total es: ', suma)
@@ -259,3 +261,17 @@ print(f"{x} * {x} = {r2}")
 
 
 
+#pruebas, borrar luego!
+this_is_my_code = 10 # prueba
+while this_is_my_code > 0: # prueba
+    this_is_my_code = this_is_my_code -1 # prueba
+    if this_is_my_code == 5: # prueba
+        break # prueba
+    print("Valor actual de la variable :", this_is_my_code) # prueba
+
+cat = 3
+CAT = 3
+Cat = 3
+cat = 3
+cat1 = 3
+cathastrophe = 3
