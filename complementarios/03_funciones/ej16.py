@@ -84,7 +84,7 @@ def int2hex(int_number):
     elif int_number == 15:
         return "0xF"
     else:
-        print(f"Error, el numero {string_} NO es un numero hexadecimal.")
+        print(f"Error, el numero {int_number} NO es un numero hexadecimal.")
         return -1
 
 string_ = input("Ingrese valor hexadecimal entre 0 y F para convertir en "
