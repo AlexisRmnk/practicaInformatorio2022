@@ -261,17 +261,22 @@ print(f"{x} * {x} = {r2}")
 
 
 
-#pruebas, borrar luego!
-this_is_my_code = 10 # prueba
-while this_is_my_code > 0: # prueba
-    this_is_my_code = this_is_my_code -1 # prueba
-    if this_is_my_code == 5: # prueba
-        break # prueba
-    print("Valor actual de la variable :", this_is_my_code) # prueba
+# importar funciones/procedimientos 
+# [Este codigo se escribe en el .py principal]
+# from ARCHIVO import nombre_funcion
+from archivo_funciones import nombre_funcion1, nombre_funcion2
 
-cat = 3
-CAT = 3
-Cat = 3
-cat = 3
-cat1 = 3
-cathastrophe = 3
+# [Este codigo se escribe en el .py de funciones]
+if __name__ == '__main__':
+    print("HOLA") # estas lineas codigo solo se van a ejecutar si se 
+    # ejecuta la funcion desde la terminal
+
+import archivo_funciones #trae todo el progama como un objeto!
+# se usan las funciones escribiendo: 
+archivo_funciones.nombre_funcion1
+
+# para importar TODAS las funciones, se usa
+from archivo_funciones import *
+
+
+
