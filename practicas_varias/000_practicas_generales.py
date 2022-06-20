@@ -278,5 +278,243 @@ archivo_funciones.nombre_funcion1
 # para importar TODAS las funciones, se usa
 from archivo_funciones import *
 
+# ejemplo en    [practicas_varias\importarPracticas\principal.py]
+#               [practicas_varias\importarPracticas\funciones_1.py]
 
+
+
+# There are four collection data types in the Python programming language:
+
+# List is a collection which is ordered and changeable. Allows duplicate members.
+# Tuple is a collection which is ordered and unchangeable. Allows duplicate members.
+# Set is a collection which is unordered, unchangeable*, and unindexed. No duplicate members.
+# Dictionary is a collection which is ordered** and changeable. No duplicate members.
+
+# *Set items are unchangeable, but you can remove items and add new items.
+# **As of Python version 3.7, dictionaries are ordered. In Python 3.6 and earlier, dictionaries are unordered.
+
+# set 
+set_ = {1, 2, 3, 4} 
+
+
+# listas
+# crear vacia
+lista_nueva = list()
+lista_nueva2 = []
+
+# crear con elementos
+lista_nueva3 = ["a", 1, True]
+lista_larga = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 
+1, 1, 0, 5, 4, 7, 8 ]
+
+# añadir elemento
+elemento = True
+lista_nueva.append(elemento)
+lista_nueva.append(3); lista_nueva.append(4); lista_nueva.append(-1)
+lista_nueva.append(11); lista_nueva.append(0); lista_nueva.append(3)
+
+lista_nueva.insert(elemento, 2) # agrega elemento en la posicion 2
+
+# modificar elemento
+lista_nueva[1] = 99
+
+# ordenar lista
+lista_nueva.sort()
+# en sentido inverso
+lista_nueva.sort(reverse = True)
+
+# invertir lista
+lista_nueva.reverse()
+
+# longitud de lista
+x = len(lista_nueva)
+
+# saber elemento en posicion particular
+x = lista_nueva[1]
+# lo mismo pero viendo de atras hacia adelante (<--)
+x = lista_nueva[-1]
+
+# recorrer lista
+for x in lista_nueva:
+    print(f"Elemento: {x}")
+
+# extender lista 
+lista_nueva.extend(lista_larga)
+
+# crear sublistas  (slicing)
+# crea una lista nueva con los elementos 2, 3 y 4 de otra lista
+lista_nueva4 = lista_nueva[2:5] #tambien se usa [:2] [2:] [:] 
+
+# listas anidadas
+lista_z = [1, ["a", "b", "c"], 3, 4]
+lista_y = [[1, 2, 3], [4, 5, 6]]
+for y in lista_y:
+    prom = sum(y)/len(y)
+    print(f"El promedio de cada elemento de lista es: {prom}")
+
+# copiar lista
+copia_lista = lista_nueva[:]
+copia_lista_v2 = lista_nueva.copy()
+
+# como NO copiar una lista:
+# lo siguiente NO CREA UNA LISTA NUEVA, sino que crea UN NUEVO APUNTADOR
+# A UNA MISMA LISTA! (hace pasaje por referencia) ej:
+lista_x = [1, 2, 3]
+lista_y = lista_x # esto NO copia una lista
+lista_y.append(99)
+print(lista_x) #imprime [1, 2, 3, 99] !
+
+# modificar varios elementos de una lista a la vez
+colores = ["rojo","verde","azul","rosado"]
+colores[1:3] = ["amarillo", "violeta"]
+print(colores) # ["rojo","amarillo","violeta","rosado"]
+
+# saber si elemento esta en lista usando IN
+if 3 in lista_nueva:
+    print("El 3 esta en la lista")
+# Saber cuantas veces se encuentra un elemento dentro de una lista 
+print(f"El 3 aparece {lista_nueva.count(3)} veces en la lista")
+# conocer indice de elemento(solo devuelve la primer coincidencia!)
+print(lista_nueva.index(3))
+
+#eliminar elemento (por indice con DEL y por elmento con REMOVE)
+del lista_nueva[0]
+del lista_nueva[1:4] # borra elementos del indice 1 al 3 incluido (4 sin incluir)
+lista_nueva.remove(99) #borra el elemento "99". SOLO LA PRIMERA COINCIDENCIA!
+lista_nueva_ultimo_elemento = lista_nueva.pop()
+lista_nueva_segundo_elemento = lista_nueva.pop(1)
+
+#funciones de listas varias
+# sum() len() max() min()
+# se pueden usar operadores matematicos en listas!
+# resultado = una_lista + otra_lista
+
+
+# LIST COMPREHESION
+# permite creare listas a partir de iterables usando la siguiente estructura:
+#   [ expression for elemento in iterable if condicion ]
+
+#   una lista con los triples de estos numeros:
+numeros = [3, 8, 1, 9]
+triples = [x*3 for x in numeros] # "por cada X en numeros, agregame un x*3 en triples"
+
+# ej: todos los números pares desde el 0 al 100
+pares = [x for x in range(0,101) if x %2 == 0]
+
+# ej: todos los cuadrados de los números pares (del 0 al 100)
+pares_cuadrado = [x**2 for x in range(0,101) if x %2 == 0]
+
+
+#TUPLAS
+# son como listas, pero INMUTABLES. Se indican entre parentesis
+tupla_nueva = tuple()
+tupla_nueva = ()
+tupla_nueva = (3,)
+# metodos count() index() max() min() sum() len()
+
+# se pueden empaquetar y desempaquetar tuplas.
+
+
+
+
+# DICCIONARIOS
+# crear
+diccionario = {}
+diccionario2 = dict()
+diccionario3 =  { "key1":"value1",
+                    "key2":"value2"
+                }
+
+# agregar elemento
+diccionario['clave'] = "valor"
+diccionario['key'] = "value"
+
+# actualizar/modificar valor
+diccionario['clave'] = "valor_actualizado" 
+
+# acceder a valor en clave "key"
+valor_de_clave_key = diccionario["key"]
+# para evitar errores, se usa metodo get
+valor_de_clave_key = diccionario.get("key")
+# si no encuentra nada, devuelve None
+# se puede configurar la devolucion por defecto en caso de no existir "key"
+valor_de_clave_key = diccionario.get("key", "no existe \"key\" ")
+print(valor_de_clave_key)
+
+
+#setDefault para agregar valor solo si no existia antes!
+diccionario.setdefault("ClaveNueva", "ValorNuevo")
+
+# imprimir valores
+print(diccionario.values())
+
+#   imprimir claves
+print(diccionario.keys())
+
+# recorrer diccionario:
+# por clave.
+for key in diccionario:
+    print(f"clave --> {key}, valor ---> {diccionario[key]}")
+
+# imprimir LISTA de TUPLAS "Key, Value"
+for clave, valor in diccionario.items():
+    print(f"clave --> {clave}, valor ---> {valor}")
+# diccionario.items() devuelve una LISTA DE TUPLAS.
+# el "for" recorre cada elemento (que es una tupla clave,valor)
+#  y la va imprimiendo con el print
+
+# verificar si una clave se encuentra en el diccionario
+if ("clave" in diccionario):
+    print(f'La clave "clave" se encuentra en el diccionario y su elemento es '
+        f'{diccionario["clave"]}')
+
+# eliminar clave:valor
+del diccionario["clave"]
+valor = diccionario.pop("clave") #si no existe la clave devuelve ERROR
+# por ello podemos usar mejor un mensaje predeterminado por si no existe clave
+valor = diccionario.pop("clave", "No existe la clave 'clave' ")
+
+# vaciar diccionario
+diccionario.clear()
+
+# EXTENDER o ACTUALIZAR diccionario con UPDATE()
+diccionario1 = {"a":1, "b":2, "c":3}
+diccionario2 = {"c":30, "d":40, "e":50}
+print(diccionario1, diccionario2)
+diccionario1.update(diccionario2)
+print(diccionario1) # {'a': 1, 'b': 2, 'c': 30, 'd': 40, 'e': 50}
+
+# Funciones y metodos
+d = diccionario1.copy()
+x1 = d.keys(); x2 = d.values(); x3 = d.items(); x4 = len(d)
+# es importante destacar x1, x2 y x3
+# estos metodos generan VISTAS. Es decir, si modificamos el 
+# diccionario 'd', las vistas reflejaran dichos cambios!
+# para guardar los valores en un momento dado se puede usar list() o tuple()
+# ej:
+print(x1) # dict_keys(['a', 'b', 'c'])
+print(x2) # dict_values([1, 2, 3])
+print(x3) # dict_items([('a', 1), ('b', 2), ('c', 3)])
+print(x4) # 3 (NO ES UNA VISTA)
+d.pop("c")      # borrado elemento con key="c"
+print(x1) # dict_keys(['a', 'b'])
+print(x2) # dict_values([1, 2])
+print(x3) # dict_items([('a', 1), ('b', 2)]))
+print(x4) # sigue siendo 3 (NO ES UNA VISTA)
+
+
+
+# Comparacion entre listas:
+# cuando se comparan 2 listas, la "mayor" sera la que tenga el primer elemento
+# mayor que la otra lista.
+# ejs: 
+[2] > [1, 2, 3] # True
+[1, 2, 2] > [1, 2, 3] # False
+[1] < [1, 2] # True
+
+a = [1, 2, 3]
+b = [1, 2, 3]
+print(a is a) # True
+b is a # False
+b == a # True
 

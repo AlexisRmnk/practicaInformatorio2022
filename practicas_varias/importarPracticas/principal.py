@@ -1,4 +1,4 @@
-from funciones import its_prime
+from funciones_1 import its_prime
 
 print("A continuacion se muestran los numeros primos del 1 al 100")
 result = ""
