@@ -17,8 +17,8 @@
 #para nuestro caso max_value =  max_stacks
 def list_fewer_elements_index(list_: list , max_value = 999): 
     '''
-    returns the index of the less full sublist on a list of lists
-    ex: [[1, 2], [3, 4, 5], [6], [7, 8]] returns index 2
+    Returns the index of the less full sublist on a list of lists.
+    Ex: [[1, 2], [3, 4, 5], [6], [7, 8]] returns index 2.
     '''
     i = 0
     minim_len = max_value + 1

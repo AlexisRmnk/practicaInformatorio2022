@@ -518,3 +518,10 @@ print(a is a) # True
 b is a # False
 b == a # True
 
+# ////////
+if (1, 2): 
+    print("test")
+# python considera cumplido el IF si lo que esta dentro NO es None
+# (eso en caso de que NO HAYA CONDICIONALES)
+# ////////
+
