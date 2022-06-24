@@ -77,7 +77,7 @@ def menu():
                 "3) VER ESTADO PILAS.\n"
                 "0) SALIR.\n")
         op = input("\t")
-        if op not in ("1","2","3","4","0"):
+        if op not in ("1","2","3","0"):
             print("ERROR - Seleccion erronea. REINTENTAR")
             continue
         else:

@@ -525,3 +525,79 @@ if (1, 2):
 # (eso en caso de que NO HAYA CONDICIONALES)
 # ////////
 
+# descubrimiento: list.copy() no funciona bien cuando la lista posee sublistas!
+# para ello mejor hacer 'import copy' y usar el metodo:
+#                                            list2 = copy.deepcopy(list1)
+def demostracion():
+    print("Generada lista 1 (lista de listas)")
+    lista1 = [[1,2,3,4], [5,6], [7], [8,9,10,11], []]
+    print(f"t0 Lista 1: {lista1}\n")
+    print("Lista 2 creada a partir de copia de lista 1 usando copy()")
+    print("Se invierte lista 2 usando 'reverse'")
+    lista2 = lista1.copy()
+    lista2.reverse()
+    print(f"t1 Lista 1: {lista1}")
+    print(f"t1 Lista 2: {lista2}\n")
+
+    print("Agregados dos elementos (12 y 13) a sublista en posicion 3 de lista 1")
+    lista1[3].append(12)
+    lista1[3].append(13)
+    print(f"t2 Lista 1: {lista1}")
+    print(f"t2 Lista 2: {lista2}\n")
+
+    print("Creada lista 3 a partir de lista 1 usando copy()")
+    lista3 = lista1.copy()
+    print(f"t3 Lista 1: {lista1}")
+    print(f"t3 Lista 2: {lista2}")
+    print(f"t3 Lista 3: {lista3}\n")
+
+    print("Invertido orden sublistas de LISTA 3 usando 'reverse'")
+    for i in range(len(lista3)):
+        lista3[i].reverse() 
+    print(f"t4 Lista 1: {lista1}")
+    print(f"t4 Lista 2: {lista2}")
+    print(f"t4 Lista 3: {lista3}")
+
+    print("\nIntento de copiar lista4 de lista1 sin que queden vinculadas")
+
+    lista4 = list()
+    for i in lista1:
+        lista4.append(i)
+    print(f"t5 lista 4: {lista4}")
+    print("\nlista 1,2,3 y 4 luego de hacer .append(14) a la ultima sublista de lista1")
+
+    lista1[-1].append(14)
+    print(f"t6 Lista 1: {lista1}")
+    print(f"t6 Lista 2: {lista2}")
+    print(f"t6 Lista 3: {lista3}")
+    print(f"t6 lista 4: {lista4}")
+
+    print("\nSegundo intento de copiar lista 5 de lista 1 sin que queden vinculadas")
+
+    lista5 = list()
+    for i in lista1:
+        lista5.append(i.copy())
+    print(f"t7 lista 5: {lista5}")
+    print("lista 1,2,3, 4 y 5 luego de hacer .append(15) a la ultima sublista de lista1\n")
+
+    lista1[-1].append(15)
+    print(f"t8 Lista 1: {lista1}")
+    print(f"t8 Lista 2: {lista2}")
+    print(f"t8 Lista 3: {lista3}")
+    print(f"t8 lista 4: {lista4}")
+    print(f"t8 lista 5: {lista5}")
+
+    print("\n Prueba deepcopy (metodo importado de 'copy')")
+    import copy
+    lista6 = copy.deepcopy(lista1)
+    print(f"t9 Lista 1: {lista1}")
+    print(f"t9 Lista 6: {lista6}")
+
+    print("\nappend(16) a ultima sublista de lista1")
+    lista1[-1].append(16)
+    print(f"t10 Lista 1: {lista1}")
+    print(f"t10 Lista 6: {lista6}")
+
+    print("\nConclusion: al copiar listas anidadas importar 'copy' y usar "
+            "copia_lista_anidada = copy.deepcopy(lista_anidada)")
+
