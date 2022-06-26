@@ -79,6 +79,32 @@ booleano_False2 = bool(None);
 # podemos corroborar el tipo de una variable con el comando type(variable)
 print(type(entero))
 
+# FUNCIONES STRINGS
+# To check if a certain phrase or character is present in a string, we can
+#  use the keyword in.
+txt_ = "hola mundo"
+if ("mundo" in txt_):
+    print("'mundo' existe en txt_")
+if ("auto" not in txt_):
+    print("'auto' no existe en txt_")
+# You can return a range of characters by using the slice syntax
+# Get the characters from position 2 to position 5 (not included):
+print(txt_[2:5])
+# imprimir ultimo caracter
+print(txt_[-1])
+
+# metodos
+# https://www.w3schools.com/python/python_strings_methods.asp
+
+# To insert characters that are illegal in a string, use an escape character.
+# An escape character is a backslash \ followed by the character you want to
+#  insert.
+# An example of an illegal character is a double quote inside a string that
+#  is surrounded by double quotes:.
+txt_ = "We are the so-called \"Vikings\" from the north."
+# https://www.w3schools.com/python/python_strings_escape.asp
+
+
 # ESTRUCTURAS DE CONTROL
 # CONDICIONALES
 # Condicional Simple: sentencia IF
@@ -118,12 +144,12 @@ elif(condicion_falsa):
 
 # Sentencia WHILE
 cont = 0
-suma = 0
+suma_ = 0
 n = int(input('Ingrese tope maximo: '))
 while (cont <= n):
-    suma = suma + cont
+    suma_ = suma_ + cont
     cont = cont + 1
-print('La suma total es: ', suma)
+print('La suma total es: ', suma_)
 
 # --
 
@@ -218,6 +244,14 @@ def funcion2(parametro1, parametro2):
     suma = parametro1 + parametro2
     return ("Valor funcion2: " +  str(suma))
 
+# If the number of arguments is unknown, add a * before the parameter name:
+# ex: ( https://www.w3schools.com/python/python_functions.asp )
+def my_function(*kids):
+  print("The youngest child is " + kids[2])
+
+my_function("Emil", "Tobias", "Linus")
+
+
 #ej llamada a funcion
 x = funcion1()
 print(x)
@@ -239,12 +273,12 @@ print(f"Suma de *5*, *7* y *13*: {funcion3(5, 7, 13)}")
 
 # que pasa si el valor opcional es el primero? el de mas a la izq
 # PONER LOS VALORES 'POR DEFECTO' AL FINAL! 
-def funcion5 (parametro2, parametro3, parametro1 = 1):
+def funcion5_(parametro2, parametro3, parametro1 = 1):
     '''funcion con VALORES POR DEFECTO'''
     # los parametros tienen valores por defecto en caso de que no se asignen
     return parametro1 + parametro2 + parametro3
 
-print(f"Suma de 5, *7* y *13*: {funcion5(parametro2 = 7, parametro3 = 13)}")
+print(f"Suma de 5, *7* y *13*: {funcion5_(parametro2 = 7, parametro3 = 13)}")
 
 
 #devolver mas de 1 valor en una funcion! sin listas ni nada
@@ -257,6 +291,51 @@ x = 3
 r1, r2 = funcion4(x)
 print(f"{x} + {x} = {r1}")
 print(f"{x} * {x} = {r2}")
+
+
+
+# type hints
+# https://docs.python.org/3/library/typing.html
+# se puede indicar mediante una pista el tipo de dato esperado para una funcion
+# esto es interpretable por el VS Code
+def funcion5(quiero_lista : list, quiero_lista_de_strings : list[str]):
+    pass
+lista = [1, 2, 3]
+lista_strings = ["1", "2", "3"]
+funcion5(lista, lista_strings)
+
+# tambien se puede indicar que tipo de valor devuelve la funcion
+#   en este caso se indica que la funcion devuelve un entero
+def suma(a:int, b:int) -> int:
+    return a + b
+
+# si quisieramos indicar mas de un tipo posible de entrada/devolucion
+#   usariamos el simbolo "|" 
+def suma2(a:int|float, b:int|float) -> int|float:
+    return a + b
+    # probar pasar mouse por encima de "a", "b" y "suma2"
+
+# usamos ''' para hacer comentarios de ayuda
+def suma3(a:int, b:int) -> int:
+    '''
+    COMENTARIO: suma 2 valores a y b
+    '''
+    return a+b
+
+
+# tambien podemos usar un ALIAS para los tipos. Ej: listas anidadas de enteros
+lista_enteros = list[int]
+lista_anidada_2_niveles = list[lista_enteros]
+def recibe_lista_anidada(lista_ani : lista_anidada_2_niveles):
+    pass # Para evitar errores cuando la funcion no hace nada
+
+lista_anid = [[1, 2, 3], [4, 5]]
+lista_anid2 = [[1.0, 2.0, 3.0], [4.0, 5.0]]
+recibe_lista_anidada(lista_anid)
+# probar pasar mouse por encima de "lista_anidada_2_niveles"
+# se puede configurar la extension PYLANCE para detectar diferencias de tipos
+# https://www.emmanuelgautier.com/blog/enable-vscode-python-type-checking
+
 
 
 
@@ -282,18 +361,26 @@ from archivo_funciones import *
 #               [practicas_varias\importarPracticas\funciones_1.py]
 
 
-
+# https://www.w3schools.com/python/python_lists.asp 
 # There are four collection data types in the Python programming language:
 
-# List is a collection which is ordered and changeable. Allows duplicate members.
-# Tuple is a collection which is ordered and unchangeable. Allows duplicate members.
-# Set is a collection which is unordered, unchangeable*, and unindexed. No duplicate members.
-# Dictionary is a collection which is ordered** and changeable. No duplicate members.
+# List is a collection which is ordered and changeable. Allows duplicate
+#   members.
+# Tuple is a collection which is ordered and unchangeable. Allows duplicate
+#   members. When we say that tuples are ordered, it means that the items
+#   have a defined order, and that order will not change.
+# Set is a collection which is unordered, unchangeable*, and unindexed. No
+#   duplicate members.
+# Dictionary is a collection which is ordered** and changeable. No duplicate
+#   members.
 
 # *Set items are unchangeable, but you can remove items and add new items.
-# **As of Python version 3.7, dictionaries are ordered. In Python 3.6 and earlier, dictionaries are unordered.
+# **As of Python version 3.7, dictionaries are ordered. In Python 3.6 and earlier,
+#   dictionaries are unordered.
 
-# set 
+# set - es un CONJUNTO (posee propiedades de union, diferencia, etc)
+# https://es.stackoverflow.com/questions/116372/qu%C3%A9-funci%C3%B3n-tiene-el-operador-en-python
+
 set_ = {1, 2, 3, 4} 
 
 
@@ -356,6 +443,7 @@ for y in lista_y:
 copia_lista = lista_nueva[:]
 copia_lista_v2 = lista_nueva.copy()
 
+# https://www.w3schools.com/python/python_lists_copy.asp 
 # como NO copiar una lista:
 # lo siguiente NO CREA UNA LISTA NUEVA, sino que crea UN NUEVO APUNTADOR
 # A UNA MISMA LISTA! (hace pasaje por referencia) ej:
@@ -363,6 +451,8 @@ lista_x = [1, 2, 3]
 lista_y = lista_x # esto NO copia una lista
 lista_y.append(99)
 print(lista_x) #imprime [1, 2, 3, 99] !
+# (mas adelante se explica como copiar listas anidadas!)
+# spoiler: importando 'copy' y usando       list2 = copy.deepcopy(list1)
 
 # modificar varios elementos de una lista a la vez
 colores = ["rojo","verde","azul","rosado"]
@@ -388,10 +478,102 @@ lista_nueva_segundo_elemento = lista_nueva.pop(1)
 # sum() len() max() min()
 # se pueden usar operadores matematicos en listas!
 # resultado = una_lista + otra_lista
+# https://www.w3schools.com/python/python_lists_methods.asp
+
+# SORT - se le puede indicar segun que clave (key) ordenar una lista!
+# https://www.w3schools.com/python/python_lists_sort.asp
+# You can customize your own function by using the keyword argument 
+#   key = function
+# example: Perform a case-insensitive sort of the list:
+thislist = ["banana", "Orange", "Kiwi", "cherry"]
+thislist.sort(key = str.lower)
+print(thislist)
+# en este caso, cada elemento se le aplica la funcion en 'key' y luego
+# ese resultado es el que se usa para hacer el sort! Es decir:
+# 1) ["banana", "Orange", "Kiwi", "cherry"]
+# 2) ["banana", "orange", "kiwi", "cherry"]
+# 3) SORT ["banana", "orange", "kiwi", "cherry"]
+
+
+# descubrimiento: list.copy() no funciona bien cuando la lista posee sublistas!
+# para ello mejor hacer 'import copy' y usar el metodo:
+#                                            list2 = copy.deepcopy(list1)
+def demostracion():
+    print("Generada lista 1 (lista de listas)")
+    lista1 = [[1,2,3,4], [5,6], [7], [8,9,10,11], []]
+    print(f"t0 Lista 1: {lista1}\n")
+    print("Lista 2 creada a partir de copia de lista 1 usando copy()")
+    print("Se invierte lista 2 usando 'reverse'")
+    lista2 = lista1.copy()
+    lista2.reverse()
+    print(f"t1 Lista 1: {lista1}")
+    print(f"t1 Lista 2: {lista2}\n")
+
+    print("Agregados dos elementos (12 y 13) a sublista en posicion 3 de lista 1")
+    lista1[3].append(12)
+    lista1[3].append(13)
+    print(f"t2 Lista 1: {lista1}")
+    print(f"t2 Lista 2: {lista2}\n")
+
+    print("Creada lista 3 a partir de lista 1 usando copy()")
+    lista3 = lista1.copy()
+    print(f"t3 Lista 1: {lista1}")
+    print(f"t3 Lista 2: {lista2}")
+    print(f"t3 Lista 3: {lista3}\n")
+
+    print("Invertido orden sublistas de LISTA 3 usando 'reverse'")
+    for i in range(len(lista3)):
+        lista3[i].reverse() 
+    print(f"t4 Lista 1: {lista1}")
+    print(f"t4 Lista 2: {lista2}")
+    print(f"t4 Lista 3: {lista3}")
+
+    print("\nIntento de copiar lista4 de lista1 sin que queden vinculadas")
+
+    lista4 = list()
+    for i in lista1:
+        lista4.append(i)
+    print(f"t5 lista 4: {lista4}")
+    print("\nlista 1,2,3 y 4 luego de hacer .append(14) a la ultima sublista de lista1")
+
+    lista1[-1].append(14)
+    print(f"t6 Lista 1: {lista1}")
+    print(f"t6 Lista 2: {lista2}")
+    print(f"t6 Lista 3: {lista3}")
+    print(f"t6 lista 4: {lista4}")
+
+    print("\nSegundo intento de copiar lista 5 de lista 1 sin que queden vinculadas")
+
+    lista5 = list()
+    for i in lista1:
+        lista5.append(i.copy())
+    print(f"t7 lista 5: {lista5}")
+    print("lista 1,2,3, 4 y 5 luego de hacer .append(15) a la ultima sublista de lista1\n")
+
+    lista1[-1].append(15)
+    print(f"t8 Lista 1: {lista1}")
+    print(f"t8 Lista 2: {lista2}")
+    print(f"t8 Lista 3: {lista3}")
+    print(f"t8 lista 4: {lista4}")
+    print(f"t8 lista 5: {lista5}")
+
+    print("\n Prueba deepcopy (metodo importado de 'copy')")
+    import copy
+    lista6 = copy.deepcopy(lista1)
+    print(f"t9 Lista 1: {lista1}")
+    print(f"t9 Lista 6: {lista6}")
+
+    print("\nappend(16) a ultima sublista de lista1")
+    lista1[-1].append(16)
+    print(f"t10 Lista 1: {lista1}")
+    print(f"t10 Lista 6: {lista6}")
+
+    print("\nConclusion: al copiar listas anidadas importar 'copy' y usar "
+            "copia_lista_anidada = copy.deepcopy(lista_anidada)")
 
 
 # LIST COMPREHESION
-# permite creare listas a partir de iterables usando la siguiente estructura:
+# permite crear listas a partir de iterables usando la siguiente estructura:
 #   [ expression for elemento in iterable if condicion ]
 
 #   una lista con los triples de estos numeros:
@@ -403,6 +585,18 @@ pares = [x for x in range(0,101) if x %2 == 0]
 
 # ej: todos los cuadrados de los números pares (del 0 al 100)
 pares_cuadrado = [x**2 for x in range(0,101) if x %2 == 0]
+
+# syntax ( https://www.w3schools.com/python/python_lists_comprehension.asp )
+# newlist = [expression for item in iterable if condition == True]
+# The iterable can be any iterable object, like a list, tuple, set etc.
+# The expression can also contain conditions, not like a filter, but as a way
+#   to manipulate the outcome
+
+# example: Return "orange" instead of "banana":
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+newlist = [x if x != "banana" else "orange" for x in fruits]
+# The expression in the example above says:
+# "Return the item if it is not banana, if it is banana return orange".
 
 
 #TUPLAS
@@ -525,79 +719,4 @@ if (1, 2):
 # (eso en caso de que NO HAYA CONDICIONALES)
 # ////////
 
-# descubrimiento: list.copy() no funciona bien cuando la lista posee sublistas!
-# para ello mejor hacer 'import copy' y usar el metodo:
-#                                            list2 = copy.deepcopy(list1)
-def demostracion():
-    print("Generada lista 1 (lista de listas)")
-    lista1 = [[1,2,3,4], [5,6], [7], [8,9,10,11], []]
-    print(f"t0 Lista 1: {lista1}\n")
-    print("Lista 2 creada a partir de copia de lista 1 usando copy()")
-    print("Se invierte lista 2 usando 'reverse'")
-    lista2 = lista1.copy()
-    lista2.reverse()
-    print(f"t1 Lista 1: {lista1}")
-    print(f"t1 Lista 2: {lista2}\n")
-
-    print("Agregados dos elementos (12 y 13) a sublista en posicion 3 de lista 1")
-    lista1[3].append(12)
-    lista1[3].append(13)
-    print(f"t2 Lista 1: {lista1}")
-    print(f"t2 Lista 2: {lista2}\n")
-
-    print("Creada lista 3 a partir de lista 1 usando copy()")
-    lista3 = lista1.copy()
-    print(f"t3 Lista 1: {lista1}")
-    print(f"t3 Lista 2: {lista2}")
-    print(f"t3 Lista 3: {lista3}\n")
-
-    print("Invertido orden sublistas de LISTA 3 usando 'reverse'")
-    for i in range(len(lista3)):
-        lista3[i].reverse() 
-    print(f"t4 Lista 1: {lista1}")
-    print(f"t4 Lista 2: {lista2}")
-    print(f"t4 Lista 3: {lista3}")
-
-    print("\nIntento de copiar lista4 de lista1 sin que queden vinculadas")
-
-    lista4 = list()
-    for i in lista1:
-        lista4.append(i)
-    print(f"t5 lista 4: {lista4}")
-    print("\nlista 1,2,3 y 4 luego de hacer .append(14) a la ultima sublista de lista1")
-
-    lista1[-1].append(14)
-    print(f"t6 Lista 1: {lista1}")
-    print(f"t6 Lista 2: {lista2}")
-    print(f"t6 Lista 3: {lista3}")
-    print(f"t6 lista 4: {lista4}")
-
-    print("\nSegundo intento de copiar lista 5 de lista 1 sin que queden vinculadas")
-
-    lista5 = list()
-    for i in lista1:
-        lista5.append(i.copy())
-    print(f"t7 lista 5: {lista5}")
-    print("lista 1,2,3, 4 y 5 luego de hacer .append(15) a la ultima sublista de lista1\n")
-
-    lista1[-1].append(15)
-    print(f"t8 Lista 1: {lista1}")
-    print(f"t8 Lista 2: {lista2}")
-    print(f"t8 Lista 3: {lista3}")
-    print(f"t8 lista 4: {lista4}")
-    print(f"t8 lista 5: {lista5}")
-
-    print("\n Prueba deepcopy (metodo importado de 'copy')")
-    import copy
-    lista6 = copy.deepcopy(lista1)
-    print(f"t9 Lista 1: {lista1}")
-    print(f"t9 Lista 6: {lista6}")
-
-    print("\nappend(16) a ultima sublista de lista1")
-    lista1[-1].append(16)
-    print(f"t10 Lista 1: {lista1}")
-    print(f"t10 Lista 6: {lista6}")
-
-    print("\nConclusion: al copiar listas anidadas importar 'copy' y usar "
-            "copia_lista_anidada = copy.deepcopy(lista_anidada)")
 
