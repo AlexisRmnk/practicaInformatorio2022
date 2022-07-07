@@ -1,3 +1,4 @@
+# Anotaciones varias. 
 # camel_case para Clases - MAYUSCULAS para constantes - snake_case para todo lo demas
 
 #guardar dato de entrada teclado en variable
@@ -293,8 +294,29 @@ print(f"{x} + {x} = {r1}")
 print(f"{x} * {x} = {r2}")
 
 
+# Argumentos indeterminados 
+# En alguna ocasión no podremos determinar previamente cuantos elementos
+# se necesita enviar a una función. En estos casos se puede utilizar los
+# ​argumentos indeterminado​s por posición y por nombre
 
-# type hints
+# por posicion (lista dinamica)
+def indet_posicion(*args):
+    '''Imprime valores pasados por parametros'''
+    for arg in args:
+        print(arg)
+        
+lista_x1 = [1, 2,["a","b"], 4]
+indet_posicion(*lista_x1)
+
+def indet_nombre(**kwargs):
+    '''Imprime valores pasados por parametros'''
+    for key, value in kwargs.items():
+        print(f"key: {key}, value: {value}")
+        
+diccionario_x1 = {"a":"A", "b": "B"}
+indet_nombre(**diccionario_x1)
+
+# type hints (sigue funciones)
 # https://docs.python.org/3/library/typing.html
 # se puede indicar mediante una pista el tipo de dato esperado para una funcion
 # esto es interpretable por el VS Code
@@ -720,3 +742,264 @@ if (1, 2):
 # ////////
 
 
+
+# ERRORES Y EXCEPCIONES
+# Ejemplo de try - catch ('except' en python) dentro de bucle While
+bandera = False
+while(True):  
+    try:
+        n = float(input("Introduce un número: "))
+        m = 4
+    #   print("{}/{} = {}".format(n,m,n/m))
+        print(f"{n}/{m} = {n/m}")
+    except:
+        print("Ha ocurrido un error, introduce bien el número")
+    else:
+        print("Todo ha funcionado correctamente")
+        bandera = True
+    finally:
+        print("Fin de la iteración") # Siempre se ejecuta
+
+    if bandera: 
+    # Importante romper la iteración si todo ha salido bien
+        break
+
+# Guardar la excepcion en una variable para analizar el tipo de error segun
+# su id, o decidir que hacer segun dicha id
+try:
+    n = input("Introduce un número: ") # no transformamos a número
+    x = 5/n
+except Exception as e: # guardamos la excepción como una variable 'e'
+    print("Ha ocurrido un error =>", type(e).__name__) # TypeError
+
+# Gracias a los identificadores de errores podemos crear múltiples
+#  comprobaciones, siempre que dejemos en último lugar la excepción
+#  por defecto Excepción que engloba cualquier tipo de error (si la
+#  pusiéramos al principio las demás excepciones nunca se ejecutarán): 
+try:
+    n = float(input("Introduce un número divisor: "))
+    x = 5/n
+except TypeError:
+    print("No se puede dividir el número entre una cadena")
+except ValueError:
+    print("Debes introducir una cadena que sea un número")
+except ZeroDivisionError:
+    print("No se puede dividir por cero, prueba otro número")
+except Exception as e:
+    print("Ha ocurrido un error no previsto", type(e).__name__ )
+
+# En algunas ocasiones quizá nos interesa llamar un ​error manualmente​,
+#  ya que un ​print común no es muy elegante. Para ello existe una palabra
+#  reservada llamada '​raise' ​con la cual podemos lanzar un error manual
+#  pasándole el identificador.
+# Luego simplemente podemos añadir un ​except ​para tratar esta excepción
+#  que hemos lanzado:
+def funcion01(valor_no_nulo = None):
+    try:
+        if valor_no_nulo is None:
+            raise ValueError("Error! No se permite un valor nulo") 
+                    # este mensaje se puede ver con el debugger de VS Code
+        print("Esta parte de codigo NO se ejecuta.")
+    except ValueError:
+        print("Error! No se permite un valor nulo (desde la excepción)")
+
+
+
+
+    # 
+    # POO
+    # Nota: escribir nombre de las clases en CamelCase (inicio con mayusculas!)
+
+class Producto: #si el nombre fuera mas grande se podria usar ProductoPrincipal
+                # por ejemplo
+
+    # metodo constructor, siempre se ejecuta al crear el objeto
+    # los metodos son esencialmente funciones dentro de objetos
+    # aplican las mismas reglas (valores por defecto, etc)
+    def __init__(self, nombre, precio : float, stock = 0):
+        self.name = nombre
+        self.price = precio
+        self.stock = stock
+        self.marca = "Marca por defecto" 
+    
+    # metodos
+    def mostrar_nombre(self):
+        print(f"Nombre del producto: {self.name}")
+
+    def mostrar_stock(self):
+        print(f"Stock del producto: {self.stock}")
+    
+    def modificar_stock(self, nuevo_stock):
+        self.stock = nuevo_stock
+
+    def devolver_stock(self):
+        return self.stock
+
+# INSTANCIACION
+# Forma similar a hacer
+#   lista_1 = list()
+
+producto1 = Producto("Tornillo", 23.5, 5)
+producto2 = Producto("Destornillador", 10, ) # ejemplo tomando valor por
+#                                              defecto para el stock
+
+# ejemplo, como en funciones, definimos el nombre del parametro al que hacemos
+#   referencia
+producto3 = Producto(precio= 55.1, stock= 1, nombre= "Tuerca")
+
+producto1.mostrar_nombre()
+producto1.mostrar_stock()
+
+producto2.mostrar_nombre()
+producto2.mostrar_stock()
+
+producto3.mostrar_nombre()
+producto3.mostrar_stock()
+print(f"Si sumamos 10 productos tendriamos {producto3.devolver_stock() + 10}"
+        " productos en total")
+
+
+producto4 = Producto("Pintura", 150.5, 15)
+## ENCAPSULAMIENTO
+producto4.stock = 3     # esto esta MAL
+print(f"{producto4.stock}") # esto esta MAL 
+
+# para eso existe el ENCAPSULAMIENTO
+# usamos los METODOS de la CLASE para obtener y usar ATRIBUTOS de un OBJETO
+producto4.modificar_stock(10)
+producto4.mostrar_stock()
+
+
+# ABSTRACCION --> ENCAPULAMIENTO:
+# METODOS PUBLICOS Y PRIVADOS
+class Ejemplo:
+    def publico(self):
+        print("Metodo publico de la clase ejemplo.\n")
+    def __privado(self): # 2 guiones bajos iniciales
+        print("Metodo privado de la clase ejemplo.")
+    def usa_privado(self):
+        print("Asi se usa un metodo privado:")
+        self.__privado()
+
+ej = Ejemplo()
+ej.publico()
+ej.usa_privado()
+# trampa de acceso
+ej._Ejemplo__privado() #(funciona en la ejecucion xq se renombra!)
+
+# ejemplo de metodos GETTERS y SETTERS
+class Ejemplo2:
+    def __init__(self, att1, att2, att3):
+        self.att1 = att1
+        self.att2 = att2
+        self.att3 = att3    
+    
+    # Getters
+    def getAtt1(self):
+        return self.att1
+    def getAtt2(self):
+        return self.att2
+    def getAtt3(self):
+        return self.att3
+    
+    # Setters
+    def setAtt1(self, att1):
+        self.att1 = att1
+    def setAtt2(self, att2):
+        self.att2 = att2
+    def setAtt3(self, att3):
+        self.att3 = att3
+        
+    
+# Nota: Puedes utilizar el atributo especial de clase name para recuperar el
+#  nombre de la clase de un objeto:      type(objeto).__name__
+
+# HERENCIA
+# En el diseño de jerarquías de herencia no siempre es del todo fácil decidir
+#  cuándo una clase debe extender a otra. La regla práctica para decidir si
+#  una clase (S) puede ser definida como heredera de otra (T) es que debe
+#  cumplirse que "S es un T". Por ejemplo, Perro es un Animal, pero Vehiculo
+#  no es un Motor.
+
+# Para indicar que una clase hereda de otra se coloca el nombre de la clase de
+#  la que se hereda entre paréntesis después del nombre de la clase:.
+class Instrumento:
+    def __init__(self, precio):
+        self.precio = precio
+
+class Bateria(Instrumento):
+    pass
+
+# sobreescribir metodos
+# ej: agregar instrucciones extra al init de Guitarra que hereda de Instrumento.
+# Escribimos un nuevo método ​__init__ para la clase Guitarra que se ejecutaría
+#    en lugar del ​__init__​ de Instrumento
+# sintaxis ​SuperClase.metodo(self, args) 
+
+class Guitarra(Instrumento):
+    def __init__(self, tipo_cuerda, precio):
+        Instrumento.__init__(self, precio)
+        self.tipo_cuerda = tipo_cuerda
+
+# Herencia multiple
+# es posible heredar de varias clases a la vez
+class Terrestre:
+    def __init__(self):
+        pass
+    def desplazar(self):
+        print("El animal anda")
+
+class Acuatico:
+    def __init__(self):
+        pass
+    def desplazar(self):
+        print("el animal nada")
+
+class Cocodrilo(Terrestre, Acuatico):
+    pass
+# Para aquellos metodos que se repitan en nombre (incluido el __init__),
+# La clase Cocodrilo tomata como prioritaria las que esten definidas mas
+# a la izquierda (Ej, en este caso usara las clases de Terrestre)
+
+
+# en caso de que se requiera el uso de el constructor
+# de alguna clase específica puede usarse la sintaxis anteriormente vista,
+# SuperClase.metodo(self, args)
+
+class Cocodrilo2(Terrestre, Acuatico):
+    def __init__(self):
+        Acuatico.__init__(self)
+
+# herencia multinivel
+# tener en cuenta que se puede heredar de clases derivadas!.
+class Figura:
+    def __init__(self, area):
+        self.area = area
+    def retornar_area(self):
+        print(f"El area de la figura es: {self.area}")
+class Poligono(Figura):
+    def __init__(self, lados, area):
+        Figura.__init__(self, area)
+        self.lados = lados
+    def retornar_lados(self):
+        print("Los lados del poligono son:", self.lados)  
+class Cuadrilatero(Poligono):
+    def __init__(self, lados, area):
+        Poligono.__init__(self, lados, area)
+
+# orden de herencia
+# todas las clases derivan de la clase "object"
+# En el escenario de herencia múltiple, cualquier atributo especificado se
+#  busca primero en la clase actual. Si no se encuentra, la búsqueda
+#  continúa en clases primarias en profundidad, de izquierda a derecha,
+#  sin buscar la misma clase dos veces
+# orden busqueda ej anterior: [​Cuadrilatero​, ​Poligono​, ​Figura​, ​object​]
+# (A esto se le llama linealizacion de la clase Cuadrilatero)
+# Sigue un conjunto de reglas llamado Method Resolution Order (MRO)
+
+# El MRO de una clase puede verse como el atributo ​__mro__ (devuelve una
+#  tupla) o el método ​mro()​  (devuelve una lista). 
+print(Cuadrilatero.__mro__)
+print(Cuadrilatero.mro())
+# (<class '__main__.Cuadrilatero'>, <class '__main__.Poligono'>, 
+#                       <class '__main__.Figura'>, <class 'object'>)
