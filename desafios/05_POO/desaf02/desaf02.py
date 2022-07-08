@@ -30,10 +30,7 @@ vehiculos.append(bi)
 vehiculos.append(moto)
             
 catalogar2(vehiculos)
-for i in range(2,5,2):
-    print(f"\nPrueba funcion catalogar con {i} ruedas:")
-    catalogar2(vehiculos, i)
-
-
-
+for ruedas_ in range(0, 5, 2): # 0, 2, 4
+    print(f"\nPrueba funcion catalogar con {ruedas_} ruedas:")
+    catalogar2(vehiculos, ruedas_)
 

@@ -1,15 +1,15 @@
-def indet_posicion(*args):
-    '''Imprime valores pasados por parametros'''
-    for arg in args:
-        print(arg)
-        
-lista_x1 = [1, 2,["a","b"], 4]
-indet_posicion(*lista_x1)
+def fun_aux(e):
+    return e['a']
 
-def indet_nombre(**kwargs):
-    '''Imprime valores pasados por parametros'''
-    for key, value in kwargs.items():
-        print(f"key: {key}, value: {value}")
-        
-diccionario_x1 = {"a":"A", "b": "B"}
-indet_nombre(**diccionario_x1)
+
+d1 = {"a": "a", "b": "x"}
+d2 = {"a": "z", "b": "x"}
+d3 = {"a": "c", "b": "x"}
+d4 = {"a": "b", "b": "x"}
+
+list_ = [d1, d2, d3, d4]
+
+
+print(list_)
+list_.sort(key=fun_aux)
+print(list_)
