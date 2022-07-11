@@ -8,3 +8,8 @@ print("GETTERS Y SETTERS AGRUPADOS:\n")
 auto_get_set(list_of_atts)
 print("\n\nGETTERS Y SETTERS ALTERNADOS:\n")
 auto_get_set2(list_of_atts)
+
+print("GETTERS Y SETTERS PRIVADOS AGRUPADOS:\n")
+auto_get_setV2(list_of_atts)
+print("\n\nGETTERS Y SETTERS PRIVADOS ALTERNADOS:\n")
+auto_get_set2V2(list_of_atts)

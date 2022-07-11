@@ -806,9 +806,11 @@ def funcion01(valor_no_nulo = None):
 
 
 
-    # 
-    # POO
-    # Nota: escribir nombre de las clases en CamelCase (inicio con mayusculas!)
+
+
+# 
+# POO
+# Nota: escribir nombre de las clases en CamelCase (inicio con mayusculas!)
 
 class Producto: #si el nombre fuera mas grande se podria usar ProductoPrincipal
                 # por ejemplo
@@ -868,6 +870,21 @@ print(f"{producto4.stock}") # esto esta MAL
 # usamos los METODOS de la CLASE para obtener y usar ATRIBUTOS de un OBJETO
 producto4.modificar_stock(10)
 producto4.mostrar_stock()
+
+# formas de mostrar el nombre de una clase
+class Clase_:
+    pass
+objeto_ = Clase_()
+print(Clase_.__name__) # imprime Clase_
+print(type(objeto_).__name__) # imprime Clase_
+print(objeto_.__class__.__name__) # imprime Clase_
+
+# forma de saber si un objeto es instancia de una clase especifica 
+# usando isinstance
+if isinstance(objeto_, Clase_):
+    print(f"El objeto 'objeto_' es de clase '{Clase_.__name__}' ")
+# forma de conocer subclases de una clase
+# usando issubclass(Clase_hija, Clase_padre)
 
 
 # ABSTRACCION --> ENCAPULAMIENTO:
@@ -935,11 +952,23 @@ class Bateria(Instrumento):
 # Escribimos un nuevo método ​__init__ para la clase Guitarra que se ejecutaría
 #    en lugar del ​__init__​ de Instrumento
 # sintaxis ​SuperClase.metodo(self, args) 
+# o sino    super().metodo(args) << NO RECOMENDADO SI HAY HERENCIA MULTIPLE
+#                                   (ver mas adelante)
 
 class Guitarra(Instrumento):
     def __init__(self, tipo_cuerda, precio):
         Instrumento.__init__(self, precio)
+       # super().__init__(precio) # hace lo mismo
         self.tipo_cuerda = tipo_cuerda
+
+# tambien se ocupa para sobreescribir metodos como los que vienen por defecto
+# ejemplo
+    def __str__(self) -> str:
+        return ("Tipo de cuerda: " + self.tipo_cuerda + ", precio: "
+                + str(self.precio))
+# aqui se imprimirian sus atributos al hacer un print:
+gui = Guitarra("metalica", 100)
+print(gui)
 
 # Herencia multiple
 # es posible heredar de varias clases a la vez
@@ -986,6 +1015,7 @@ class Poligono(Figura):
 class Cuadrilatero(Poligono):
     def __init__(self, lados, area):
         Poligono.__init__(self, lados, area)
+        
 
 # orden de herencia
 # todas las clases derivan de la clase "object"
