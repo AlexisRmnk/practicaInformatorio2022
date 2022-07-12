@@ -20,7 +20,8 @@ def setter_ (atribute_:str, is_private:bool = False):
 def list_atts():
     print(("\nIngresar cadenas con atributos ('ENTER' para ingresar"
            " siguiente atributo, '0' para finalizar carga de atributos)."
-            "\nFormato de Ejemplo: 'atributo1'\n\t"))
+            "\nFormato de Ejemplo: 'atributo1' (se permiten guiones "
+            "bajos '_')\n\t"))
     list_of_atts = list()
     i = 1
     while(True):
@@ -29,8 +30,8 @@ def list_atts():
         string_.strip()
         if string_ == "0":
             print("Finalizando carga de atributos\n")
-            break   
-        if not string_.isalnum():
+            break
+        if not string_.replace("_","").isalnum():
             print("Valor invalido, recordar poner atributo con la forma "
                 "'atributo1'")
             continue
