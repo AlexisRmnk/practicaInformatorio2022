@@ -58,7 +58,10 @@ class Agenda:
                    f"Email: {contact['email']}")
        
     def __sorts_agenda(self):
-        ''' sorts an agenda by the first key value ("name" in this case)'''
+        ''' 
+        Sorts an agenda by the first key value ("name" in this case).
+        An agenda is a list of dicts
+        '''
         def returns_name_value(e):
             return e['name']
         

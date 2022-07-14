@@ -879,6 +879,10 @@ print(Clase_.__name__) # imprime Clase_
 print(type(objeto_).__name__) # imprime Clase_
 print(objeto_.__class__.__name__) # imprime Clase_
 
+# imprimir atributos y metodos de una clase
+print(objeto_.__dict__) # imprime diccionario de atributos
+print(objeto_.__dir__()) # imprime lista con todos los metodos
+
 # forma de saber si un objeto es instancia de una clase especifica 
 # usando isinstance
 if isinstance(objeto_, Clase_):
