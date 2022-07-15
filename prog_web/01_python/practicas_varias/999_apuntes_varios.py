@@ -724,15 +724,22 @@ print(x4) # sigue siendo 3 (NO ES UNA VISTA)
 # cuando se comparan 2 listas, la "mayor" sera la que tenga el primer elemento
 # mayor que la otra lista.
 # ejs: 
-[2] > [1, 2, 3] # True
-[1, 2, 2] > [1, 2, 3] # False
-[1] < [1, 2] # True
+[2] > [1, 2, 3]                                             # type: ignore
+# True 
+
+[1, 2, 2] > [1, 2, 3]                                       # type: ignore
+# False
+
+[1] < [1, 2]                                                # type: ignore
+# True
 
 a = [1, 2, 3]
 b = [1, 2, 3]
 print(a is a) # True
-b is a # False
-b == a # True
+b is a                                                      # type: ignore
+# False
+b == a                                                      # type: ignore
+# True
 
 # ////////
 if (1, 2): 
@@ -768,7 +775,7 @@ while(True):
 # su id, o decidir que hacer segun dicha id
 try:
     n = input("Introduce un número: ") # no transformamos a número
-    x = 5/n
+    x = 5/n                                                 # type: ignore
 except Exception as e: # guardamos la excepción como una variable 'e'
     print("Ha ocurrido un error =>", type(e).__name__) # TypeError
 
@@ -905,8 +912,8 @@ class Ejemplo:
 ej = Ejemplo()
 ej.publico()
 ej.usa_privado()
-# trampa de acceso
-ej._Ejemplo__privado() #(funciona en la ejecucion xq se renombra!)
+# trampa de acceso (#(funciona en la ejecucion xq se renombra!))
+ej._Ejemplo__privado()  # type: ignore
 
 # ejemplo de metodos GETTERS y SETTERS
 class Ejemplo2:

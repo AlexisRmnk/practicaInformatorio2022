@@ -56,11 +56,5 @@ CTRL + L ayuda a subrayar multiples lineas a la vez.
 
 CTRL + Ñ para activar terminal
 
-test1 = 1 lol 1  1 1 1 1 1 
-test2 = 2 lol 2  2 2 2 2 2
-test3 = 3 lol 3  3 3 3 3 3
-test4 = 4 lol 4  4 4 4 4 4
-1
-2
-3
-4
+se pueden ignorar errores usando 
+                                # type: ignore
