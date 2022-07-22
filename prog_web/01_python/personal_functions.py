@@ -1,8 +1,8 @@
 # These are my own personal functions to use on my code
 
 def test():
-    '''Just for testing purposes. This prints "IT WORKS!"'''
-    print("IT WORKS!")
+    '''Just for testing purposes. This prints "HELLO WORLD"'''
+    print("HELLO WORLD")
 
 def check_return_int(x:str):
     '''
@@ -13,6 +13,18 @@ def check_return_int(x:str):
             return int(x)
         except:
             print(f"El valor {x} no es un numero entero. Reintentar.")
+            x = input("\t")
+            continue
+
+def check_return_float(x:str):
+    '''
+    Use with an input. It checks out if the input is a float!
+    '''
+    while(True):
+        try:
+            return float(x)
+        except:
+            print(f"El valor {x} no es un numero decimal. Reintentar.")
             x = input("\t")
             continue
 
