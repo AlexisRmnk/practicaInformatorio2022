@@ -33,4 +33,4 @@ def menu():
         elif op == 4:
             d.sum_products_price()
         else: # op = 5
-            pass
+            d.sum_products_price(True)

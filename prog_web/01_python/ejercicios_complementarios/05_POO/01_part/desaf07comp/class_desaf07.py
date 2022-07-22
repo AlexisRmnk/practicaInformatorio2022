@@ -31,16 +31,19 @@ class Deposit:
     
     def sum_products_price(self, ask_brand = False):
         sum_ = 0
-        if ask_brand:            
+        if ask_brand:
+            counter = 0            
             brand = input("Especificar marca:\n\t").title().strip()
             string_ = ""
             for p in self.products:
                 if p.getBrand() == brand:
                     sum_ = sum_ + p.getPrice()
                     string_ = string_ + p.return_str_atts() + "\n"
-            print(f"La suma de precios de los {len(self.products)} productos "
+                    counter+=1
+                    
+            print(f"La suma de precios de los {counter} productos "
                 f"de la marca {brand} es: $ {sum_}")
-            print(f"Los mismos se listan a continuacion: {string_}")
+            print(f"Los mismos se listan a continuacion:\n{string_}")
         else:
             for p in self.products:
                 sum_ = sum_ + p.getPrice()
