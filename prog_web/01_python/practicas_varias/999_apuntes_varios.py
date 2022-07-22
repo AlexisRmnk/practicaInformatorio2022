@@ -1044,3 +1044,18 @@ print(Cuadrilatero.__mro__)
 print(Cuadrilatero.mro())
 # (<class '__main__.Cuadrilatero'>, <class '__main__.Poligono'>, 
 #                       <class '__main__.Figura'>, <class 'object'>)
+
+
+
+
+# This block of code is for using my own functions
+# https://stackoverflow.com/questions/3430372/how-do-i-get-the-full-path-of-the-current-files-directory
+# https://www.codegrepper.com/code-examples/python/python+call+function+from+another+folder
+import sys # sys.path is a list of absolute path strings
+import pathlib
+sys.path.append(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# check number of ".parent" using
+# print(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# it has to return something like "...\prog_web\01_python"
+import personal_functions
+# print(personal_functions.test())

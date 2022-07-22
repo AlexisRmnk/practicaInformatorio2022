@@ -5,7 +5,7 @@
 #  la edad promedio de pacientes y además el día en que se registró el 
 #  máximo de pacientes.
 
-edad_acum = paciente_maximo = 0
+dia_maximo= edad_acum = paciente_maximo = 0
 dia = paciente = 1
 
 while(True):
