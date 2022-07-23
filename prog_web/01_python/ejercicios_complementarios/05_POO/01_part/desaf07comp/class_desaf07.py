@@ -65,7 +65,7 @@ class Deposit:
     def add_product(self): 
         print("AGREGAR PRODUCTO:\nIndicar tipo de producto:")
         print("\t1) Agua Mineral\n\t2) Gaseosa")
-        x = personal_functions.check_return_int(input("\t"))
+        x = personal_functions.convert_to_int(input("\t"))
         x = personal_functions.check_range(x, 1, 2) # returns 1 or 2
         if x == 1:
             p = MineralWater()
@@ -84,7 +84,7 @@ class Deposit:
             if id_x == p.getId_():
                 print(p.return_str_atts())               
                 print("Confirmar eliminacion de producto (0 - NO, 1 - SI)")
-                x = personal_functions.check_return_int(input("\t"))
+                x = personal_functions.convert_to_int(input("\t"))
                 x = personal_functions.check_range(x, 0, 1)
                 if x == 1:
                     self.products.remove(p)
@@ -107,7 +107,7 @@ class Product:
         print("Ingresar datos:")
         self.id_ = input("Id: ").upper().strip()
         self.liters = input("Litros: ")
-        self.price = personal_functions.check_return_float(input("Precio: $ "))
+        self.price = personal_functions.convert_to_float(input("Precio: $ "))
         self.brand = input("Marca: ").title().strip()
     
     def return_str_atts(self):
@@ -148,7 +148,7 @@ class Soda(Product):
     def __init__(self):
         super().__init__()
         self.p_sugar = input("Porcentaje de azucar: ")
-        x = personal_functions.check_return_int(input("Tiene promocion? "
+        x = personal_functions.convert_to_int(input("Tiene promocion? "
                                                       "(0 - NO, 1 - SI)\n\t"))
         x = personal_functions.check_range(x, 0, 1)
         has_promo = bool(x)

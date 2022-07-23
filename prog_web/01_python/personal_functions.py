@@ -4,7 +4,7 @@ def test():
     '''Just for testing purposes. This prints "HELLO WORLD"'''
     print("HELLO WORLD")
 
-def check_return_int(x:str):
+def convert_to_int(x):
     '''
     Use with an input. It checks out if the input is an integer!
     '''
@@ -16,7 +16,23 @@ def check_return_int(x:str):
             x = input("\t")
             continue
 
-def check_return_float(x:str):
+def check_non_negative(x):
+    while(True):
+        try:
+            x = float(x)
+            if x < 0:
+                print(f"{x} es un valor negativo. Ingresar un valor"
+                        " mayor o igual a 0:")    
+                x = input("\t")  
+                continue
+            else:
+                return x        
+        except:
+            print(f"{x} no es un valor numerico. Volver a ingresar:")
+            x = input("\t")
+        
+
+def convert_to_float(x):
     '''
     Use with an input. It checks out if the input is a float!
     '''
@@ -24,15 +40,15 @@ def check_return_float(x:str):
         try:
             return float(x)
         except:
-            print(f"El valor {x} no es un numero decimal. Reintentar.")
+            print(f"El valor {x} no se puede convertir a numero decimal. Reintentar.")
             x = input("\t")
             continue
 
 def check_range(x:int, bottom_n:int, top_n:int):
     ''' 
     continues if x is an integer between "bottom_n" and "top_n"
-    ex:     check_range(17, 1, 10) returns False. 
-            check_range(5, 1, 10) returns True. 
+    ex:     check_range(17, 1, 10) makes you change 17 for another number. 
+            check_range(5, 1, 10) returns 5. 
     '''
     while(True):
         try:
@@ -41,9 +57,9 @@ def check_range(x:int, bottom_n:int, top_n:int):
             else:
                 print(f"{x} no es un valor entero comprendido entre "
                     f"{bottom_n} y {top_n}. Reintentar operacion.")
-                x = check_return_int(input("\t"))
+                x = convert_to_int(input("\t"))
         except:
-            x = check_return_int(input("\t"))
+            x = convert_to_int(input("\t"))
         
 
 def make_menu(*kargs, exit_option = "Exit"):
@@ -63,7 +79,7 @@ def make_menu(*kargs, exit_option = "Exit"):
     menu_str = menu_str + f"\n\t0)\t{exit_option}"
     print(menu_str)
     # checks if x is integer, then checks if it is in range
-    x = check_return_int(input("\t"))
+    x = convert_to_int(input("\t"))
     x = check_range(x, 0, len(kargs))
     return x
 
