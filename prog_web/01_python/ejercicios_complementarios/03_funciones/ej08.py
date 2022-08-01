@@ -18,7 +18,7 @@
 #   conceptos de listas ni indices pero que no cumple con la condicion
 #   de que una "i" minúscula debe reemplazarse por una "I" mayúscula si 
 #   está precedida y seguida de un espacio. 
-# capitalizeStringV1(string_) funciona bien para todos los casos pero
+# capitalizeStringV2(string_) funciona bien para todos los casos pero
 #   ocupa ALGUNOS conocimientos sobre listas y arreglos. Podria ser
 #   optimizado mas adelante.
 

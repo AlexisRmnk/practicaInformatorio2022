@@ -1,3 +1,6 @@
+color theme usado: Atom background modified italic
+(cambiar en file>preferences)
+
 https://www.youtube.com/watch?v=E9vvELwvVG0&ab_channel=Code2020
 https://www.youtube.com/watch?v=ifTF3ags0XI
 
@@ -57,4 +60,15 @@ CTRL + L ayuda a subrayar multiples lineas a la vez.
 CTRL + Ñ para activar terminal
 
 se pueden ignorar errores usando 
-                                # type: ignore
+                                #type: ignore
+se puede aclarar el tipo de variable usando       
+    #type: (tipo_de_variable)
+    ej en python para indicar que una variable es un diccionario con claves de tipo
+        entero y valores de tipo string:
+                                #type: dict[int, str]      
+https://docs.python.org/3/library/typing.html
+
+para el caso especifico de python, se puede configurar la extension PYLANCE para 
+detectar diferencias de tipos
+# https://www.emmanuelgautier.com/blog/enable-vscode-python-type-checking
+

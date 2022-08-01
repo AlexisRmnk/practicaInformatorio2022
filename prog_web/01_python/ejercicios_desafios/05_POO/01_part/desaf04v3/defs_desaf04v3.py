@@ -20,12 +20,12 @@ def agenda_menu(): # responsabilidad y patrones de diseño (MVC)
             ag.delete_contacts()
             
 def __aux_menu(): 
-        while(True):
-            print("INDICAR OPERACION:\n\tAñadir contacto\t\t(1)\n\tLista de "
-                  "contactos\t(2)\n\tBuscar contacto\t\t(3)\n\tEditar contacto"
-                  "\t\t(4)\n\tEliminar contacto\t(5)\n\n\tCerrar Agenda\t\t(0)")
-            x = input("\t").strip()
-            if x not in ("0", "1", "2", "3", "4", "5"):
-                print("Error. Reintentar ingreso de operacion.")
-                continue
-            return x
+    while(True):
+        print("INDICAR OPERACION:\n\tAñadir contacto\t\t(1)\n\tLista de "
+                "contactos\t(2)\n\tBuscar contacto\t\t(3)\n\tEditar contacto"
+                "\t\t(4)\n\tEliminar contacto\t(5)\n\n\tCerrar Agenda\t\t(0)")
+        x = input("\t").strip()
+        if x not in ("0", "1", "2", "3", "4", "5"):
+            print("Error. Reintentar ingreso de operacion.")
+            continue
+        return x

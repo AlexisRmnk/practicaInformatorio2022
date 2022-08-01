@@ -6,8 +6,7 @@
 import sys # sys.path is a list of absolute path strings
 import pathlib
 sys.path.append(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()))
-# check number of ".parent" using
-# print(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# check number of ".parent" doing a print of the STR in the line above
 # it has to return something like "...\prog_web\01_python"
 import personal_functions
 #print(personal_functions.test())

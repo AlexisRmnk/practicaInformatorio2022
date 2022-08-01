@@ -358,7 +358,13 @@ recibe_lista_anidada(lista_anid)
 # se puede configurar la extension PYLANCE para detectar diferencias de tipos
 # https://www.emmanuelgautier.com/blog/enable-vscode-python-type-checking
 
-
+# por ultimo, tambien se puede indicar el tipo de una variable usando 
+# comentarios.  Ej:
+def funcion_test():
+    diccionario_nuevo = dict() #type: dict[int, str]
+    # esto indica que diccionario_nuevo sera un diccionario con claves de tipo "int"
+    # y valores de tipo "str"
+    
 
 
 
@@ -1054,8 +1060,7 @@ print(Cuadrilatero.mro())
 import sys # sys.path is a list of absolute path strings
 import pathlib
 sys.path.append(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()))
-# check number of ".parent" using
-# print(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# check number of ".parent" doing a print of the STR in the line above
 # it has to return something like "...\prog_web\01_python"
 import personal_functions
 # print(personal_functions.test())
