@@ -72,3 +72,4 @@ para el caso especifico de python, se puede configurar la extension PYLANCE para
 detectar diferencias de tipos
 # https://www.emmanuelgautier.com/blog/enable-vscode-python-type-checking
 
+ 
