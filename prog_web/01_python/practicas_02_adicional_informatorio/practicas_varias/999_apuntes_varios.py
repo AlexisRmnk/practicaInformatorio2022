@@ -10,7 +10,8 @@ print(f"Su nombre es {nombre} y tiene {len(nombre)} caracteres.")
 
 #iniciar varias variables con un unico valor
 var1 = var2 = var3 = 10
-#iniciar
+#iniciar varias variables con distintos valores (usando desempaquetado)
+var1v2, var2v2, var3v2 = 10, 20, 30
 
 
 #operadores aritmeticos + - * / // % **
