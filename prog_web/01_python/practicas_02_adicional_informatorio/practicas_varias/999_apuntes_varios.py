@@ -1067,3 +1067,12 @@ sys.path.append(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.re
 # it has to return something like "...\prog_web\01_python"
 import personal_functions
 # print(personal_functions.test())
+
+
+#################################################################################
+# continua en 
+# \practicas_03_adicional_post_info\apuntes_varios_p2.py
+
+
+
+

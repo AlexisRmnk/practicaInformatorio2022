@@ -15,16 +15,16 @@ while(True):
     liters = float(input((f"Ingrese la cantidad de litros comprados:\n")))
     print((f"Ingrese el tipo de combustible comprado:\n"))
     print(f"'A' $50 ----- 'B' $55 ----- 'C' $60 ----- ('D' para SALIR)")
-    tipe = input().upper()
-    if tipe == "D":
+    type_ = input().upper()
+    if type_ == "D":
         print("Finalizando programa.")
         client = client - 1
         break
-    elif (tipe == 'A'):
+    elif (type_ == 'A'):
         price = 50
-    elif (tipe == 'B'):
+    elif (type_ == 'B'):
         price = 55
-    elif (tipe == 'C'):
+    elif (type_ == 'C'):
         price = 60
     else:
         print("La letra no corresponde a los valores solicitados."
