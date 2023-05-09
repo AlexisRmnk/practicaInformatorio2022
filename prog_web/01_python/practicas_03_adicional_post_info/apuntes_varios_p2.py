@@ -33,8 +33,8 @@ print(dir(r) ) # >    ['__bool__', ... , 'count', 'index', 'start', 'step', 'sto
 print( hasattr(r, "start") , r.start , sep=" " )
 
 
-#Expresiones logicas OR y AND
-#usando OR y AND puedo devolver resultados de torma similar a con JS 
+# Expresiones logicas OR y AND
+# usando OR y AND puedo devolver resultados de forma similar a con JS 
 #                          cuando usabamos operadores de cortocircuito
 
 t = [1, [2,3], True] 
@@ -58,7 +58,7 @@ a, b, c = "hey"
 print(a, b, c)
 
 # se puede desempaquetar unicamente cuando las etiquetas a la izquierda de la asignacion estan dentro de una lista o tupla. 
-# Para indicar una lista de un solo elemento se puede usar la siguiente notacion
+# Para indicar una lista de un solo elemento se puede usar la siguiente notacion:
 [a] = [1]
 print(a) # 1
 print(type(a)) # int
@@ -145,9 +145,9 @@ for iteration,[*i, j] in enumerate([ "gato", [1,2,3], "python", "perro" ]):
     print("j: ", j)
     
 
-# all y any permiten determinar en un iterable si:
-    # all: todos los objetos son True
-    # any: hay al menos 1 obj True
+# 'all' y 'any' permiten determinar en un iterable si:
+    # 'all': todos los objetos son True
+    # 'any': hay al menos 1 obj True
     
 t = [1, [2,3], True] 
 f = [0 , {}, False]
@@ -184,6 +184,13 @@ iterable = [1, 2, 3]
 m = map(def_square, iterable)
 for i in m:
     print(i)
+# un map puede ser iterado 1 sola vez! si intento usarlo de nuevo: 
+for i in m:
+    print(i) # no va a imprimir nada!
+    
+# para guardar valores del map en una lista
+m = map(def_square, iterable) # volvemos a generar el map
+lista_valores = list(m)
 
 # se pueden usar 2 iterables si la funcion necesita mas de un parametro
 def def_product(x, y):
@@ -206,6 +213,7 @@ f = filter( def_checks_even_n, iterable)
 
 for item in f:
     print(item)
+# al igual que con map(), solo se puede recorrer una vez
     
 # tambien es posible hacer un filtro cuyo primer parametro en vez 
 # de ser funcion, sea None
@@ -232,7 +240,19 @@ print(f"dict1: {dict1} - dict1_copy: {dict1_copy}")
 cadena = " \" "; cadena = ' " '
 
 
+#como leer un archivo en excel
+import pandas as pd
+df = pd.read_excel('file.xlsx')
 
+
+
+# como operar con decimales sin problemas
+from decimal import Decimal
+
+a = Decimal("55.2")
+print(f"x1: {a / Decimal('10')}")
+print(f"x2: {a // Decimal('10')}")
+print(f"x3: {a % Decimal('10')}")
 
 
     

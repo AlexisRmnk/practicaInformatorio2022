@@ -48,6 +48,7 @@ diccionarioTest = {
     False: "valor false",
     1: "uno",
     "dos": 2
+# llave : valor
 }
 print("Nuestro diccionario es de tipo: ", type(diccionarioTest), 
 ", visto con el comando type(variable)")
@@ -73,7 +74,7 @@ cadena_convertido_a_decimal = float(cadena)
 entero_convertido_a_cadena = str(entero)
 entero_convertido_a_cadena_hexadecimal = hex(entero) #tipo str
 entero_convertido_a_caracter = chr(entero) #tipo str
-caracter_convertido_a_entero = ord(caracter)
+caracter_convertido_a_entero = ord(caracter) #(valor resultado: 97)
 cadena_convertido_en_numero_complejo = complex("10+5j")
 #caso bool(): el 0 y el None lo convierte en "False". 
 # El resto en "True".
@@ -93,9 +94,9 @@ if ("auto" not in txt_):
     print("'auto' no existe en txt_")
 # You can return a range of characters by using the slice syntax
 # Get the characters from position 2 to position 5 (not included):
-print(txt_[2:5])
+print(txt_[2:5]) # 'la '
 # imprimir ultimo caracter
-print(txt_[-1])
+print(txt_[-1]) # 'o'
 
 # metodos
 # https://www.w3schools.com/python/python_strings_methods.asp
@@ -282,7 +283,7 @@ def funcion5_(parametro2, parametro3, parametro1 = 1):
     # los parametros tienen valores por defecto en caso de que no se asignen
     return parametro1 + parametro2 + parametro3
 
-print(f"Suma de 5, *7* y *13*: {funcion5_(parametro2 = 7, parametro3 = 13)}")
+print(f"Suma de 1, *7* y *13*: {funcion5_(parametro2 = 7, parametro3 = 13)}")
 
 
 #devolver mas de 1 valor en una funcion! sin listas ni nada
@@ -381,7 +382,7 @@ if __name__ == '__main__':
     print("HOLA") # estas lineas codigo solo se van a ejecutar si se 
     # ejecuta la funcion desde la terminal
 
-import archivo_funciones #trae todo el progama como un objeto!
+import archivo_funciones #trae todo el programa como un objeto!
 # se usan las funciones escribiendo: 
 archivo_funciones.nombre_funcion1
 
@@ -390,6 +391,24 @@ from archivo_funciones import *
 
 # ejemplo en    [practicas_varias\importarPracticas\principal.py]
 #               [practicas_varias\importarPracticas\funciones_1.py]
+
+
+# lambda functions
+# asked to IA https://www.phind.com/
+'''
+In Python, a lambda function is a small, anonymous function that can
+be defined in a single line of code. It is also known as an inline 
+function or a lambda expression. Lambda functions are typically used 
+in situations where a named function would be overkill, or where a 
+function is needed for a short period of time and doesn't need to be
+saved for later use.
+'''
+# syntax:   lambda arguments: expression
+sum = lambda x, y: x + y
+print(sum(2, 3))  # Output: 5
+
+
+
 
 
 # https://www.w3schools.com/python/python_lists.asp 
@@ -431,10 +450,9 @@ lista_nueva.append(elemento)
 lista_nueva.append(3); lista_nueva.append(4); lista_nueva.append(-1)
 lista_nueva.append(11); lista_nueva.append(0); lista_nueva.append(3)
 
-lista_nueva.insert(elemento, 2) # agrega elemento en la posicion 2
+lista_nueva.insert(3, 2) # inserta '2' en la posicion 3
 
-# modificar elemento
-lista_nueva[1] = 99
+lista_nueva[1] = 99 # modifica elemento en la posicion 1
 
 # ordenar lista
 lista_nueva.sort()
@@ -449,7 +467,7 @@ x = len(lista_nueva)
 
 # saber elemento en posicion particular
 x = lista_nueva[1]
-# lo mismo pero viendo de atras hacia adelante (<--)
+# lo mismo pero viendo de atras hacia adelante, der a izq (<--)
 x = lista_nueva[-1]
 
 # recorrer lista
@@ -498,12 +516,12 @@ print(f"El 3 aparece {lista_nueva.count(3)} veces en la lista")
 # conocer indice de elemento(solo devuelve la primer coincidencia!)
 print(lista_nueva.index(3))
 
-#eliminar elemento (por indice con DEL y por elmento con REMOVE)
+#eliminar elemento (por indice con DEL y por elemento con REMOVE)
 del lista_nueva[0]
 del lista_nueva[1:4] # borra elementos del indice 1 al 3 incluido (4 sin incluir)
 lista_nueva.remove(99) #borra el elemento "99". SOLO LA PRIMERA COINCIDENCIA!
 lista_nueva_ultimo_elemento = lista_nueva.pop()
-lista_nueva_segundo_elemento = lista_nueva.pop(1)
+lista_nueva_segundo_elemento = lista_nueva.pop(1) # elemento en posicion 1
 
 #funciones de listas varias
 # sum() len() max() min()
@@ -522,8 +540,16 @@ print(thislist)
 # en este caso, cada elemento se le aplica la funcion en 'key' y luego
 # ese resultado es el que se usa para hacer el sort! Es decir:
 # 1) ["banana", "Orange", "Kiwi", "cherry"]
-# 2) ["banana", "orange", "kiwi", "cherry"]
-# 3) SORT ["banana", "orange", "kiwi", "cherry"]
+# 2) [str.lower("banana"), str.lower("Orange"), str.lower("Kiwi"), str.lower("cherry"])
+# 3) ["banana", "orange", "kiwi", "cherry"]
+# 4) SORT ["banana", "orange", "kiwi", "cherry"]
+
+
+x = [0,1,2,3,4,5,6,7,8,9]
+# manejo de listas similar a los parametros de range(star, stop, step) stop=index
+sliced = x[1:8:2]
+print(sliced) # [1, 3, 5, 7]
+
 
 
 # descubrimiento: list.copy() no funciona bien cuando la lista posee sublistas!
@@ -605,17 +631,17 @@ def demostracion():
 
 # LIST COMPREHESION
 # permite crear listas a partir de iterables usando la siguiente estructura:
-#   [ expression for elemento in iterable if condicion ]
+#   [ 'expression' for 'elemento' in 'iterable' if 'condicion' ]
 
 #   una lista con los triples de estos numeros:
 numeros = [3, 8, 1, 9]
 triples = [x*3 for x in numeros] # "por cada X en numeros, agregame un x*3 en triples"
 
 # ej: todos los números pares desde el 0 al 100
-pares = [x for x in range(0,101) if x %2 == 0]
+pares = [x for x in range(0,101) if x % 2 == 0]
 
 # ej: todos los cuadrados de los números pares (del 0 al 100)
-pares_cuadrado = [x**2 for x in range(0,101) if x %2 == 0]
+pares_cuadrado = [x**2 for x in range(0,101) if x % 2 == 0]
 
 # syntax ( https://www.w3schools.com/python/python_lists_comprehension.asp )
 # newlist = [expression for item in iterable if condition == True]
@@ -673,7 +699,7 @@ diccionario.setdefault("ClaveNueva", "ValorNuevo")
 # imprimir valores
 print(diccionario.values())
 
-#   imprimir claves
+# imprimir claves
 print(diccionario.keys())
 
 # recorrer diccionario:
@@ -828,7 +854,7 @@ def funcion01(valor_no_nulo = None):
 # POO
 # Nota: escribir nombre de las clases en CamelCase (inicio con mayusculas!)
 
-class Producto: #si el nombre fuera mas grande se podria usar ProductoPrincipal
+class Producto: #si el nombre fuera mas largo se podria usar ProductoPrincipal
                 # por ejemplo
 
     # metodo constructor, siempre se ejecuta al crear el objeto
@@ -881,6 +907,7 @@ producto4 = Producto("Pintura", 150.5, 15)
 ## ENCAPSULAMIENTO
 producto4.stock = 3     # esto esta MAL
 print(f"{producto4.stock}") # esto esta MAL 
+# no acceder directamente a la informacion de los atributos
 
 # para eso existe el ENCAPSULAMIENTO
 # usamos los METODOS de la CLASE para obtener y usar ATRIBUTOS de un OBJETO
@@ -947,9 +974,13 @@ class Ejemplo2:
     def setAtt3(self, att3):
         self.att3 = att3
         
-    
-# Nota: Puedes utilizar el atributo especial de clase name para recuperar el
-#  nombre de la clase de un objeto:      type(objeto).__name__
+# Nota: Podes utilizar el atributo especial de clase name para recuperar el
+#   nombre de la clase de un objeto:      type(objeto).__name__
+# Nota: hice un programa que genera estos automaticamente en 
+# D:\CURSOS\Informatorio\INFORMATORIO2022\prog_web
+#   \01_python\practicas_02_adicional_informatorio\
+#   practicas_varias\auto_getters_setters_py\auto_getter_setter.py
+
 
 # HERENCIA
 # En el diseño de jerarquías de herencia no siempre es del todo fácil decidir
@@ -959,7 +990,7 @@ class Ejemplo2:
 #  no es un Motor.
 
 # Para indicar que una clase hereda de otra se coloca el nombre de la clase de
-#  la que se hereda entre paréntesis después del nombre de la clase:.
+#  la que se hereda entre paréntesis después del nombre de la clase:
 class Instrumento:
     def __init__(self, precio):
         self.precio = precio
@@ -981,8 +1012,8 @@ class Guitarra(Instrumento):
        # super().__init__(precio) # hace lo mismo
         self.tipo_cuerda = tipo_cuerda
 
-# tambien se ocupa para sobreescribir metodos como los que vienen por defecto
-# ejemplo
+    # tambien se ocupa para sobreescribir metodos como los que vienen por defecto
+    # ejemplo
     def __str__(self) -> str:
         return ("Tipo de cuerda: " + self.tipo_cuerda + ", precio: "
                 + str(self.precio))
@@ -1042,8 +1073,8 @@ class Cuadrilatero(Poligono):
 # En el escenario de herencia múltiple, cualquier atributo especificado se
 #  busca primero en la clase actual. Si no se encuentra, la búsqueda
 #  continúa en clases primarias en profundidad, de izquierda a derecha,
-#  sin buscar la misma clase dos veces
-# orden busqueda ej anterior: [​Cuadrilatero​, ​Poligono​, ​Figura​, ​object​]
+#  sin buscar la misma clase dos veces.
+# Orden busqueda ej anterior: [​Cuadrilatero​, ​Poligono​, ​Figura​, ​object​]
 # (A esto se le llama linealizacion de la clase Cuadrilatero)
 # Sigue un conjunto de reglas llamado Method Resolution Order (MRO)
 
@@ -1062,9 +1093,10 @@ print(Cuadrilatero.mro())
 # https://www.codegrepper.com/code-examples/python/python+call+function+from+another+folder
 import sys # sys.path is a list of absolute path strings
 import pathlib
-sys.path.append(str(pathlib.Path(__file__).parent.parent.parent.parent.parent.resolve()))
+sys.path.append(str(pathlib.Path(__file__).parent.parent.resolve()))
+print(str(pathlib.Path(__file__).parent.parent.resolve()))
 # check number of ".parent" doing a print of the STR in the line above
-# it has to return something like "...\prog_web\01_python"
+# it has to return something like "...\prog_web\01_python\practicas_02_adicional_informatorio"
 import personal_functions
 # print(personal_functions.test())
 
@@ -1072,7 +1104,3 @@ import personal_functions
 #################################################################################
 # continua en 
 # \practicas_03_adicional_post_info\apuntes_varios_p2.py
-
-
-
-

@@ -1,20 +1,24 @@
 # autogetter y setter for python
 # author: Alexis Romaniuk
 
+def first_letter_uppercase(string_:str) -> str:
+    '''reemplazo de string_.capitalize'''
+    return string_[0].upper() + string_[1:]
+
 def getter_ (atribute_:str, is_private:bool = False):
     if is_private:
-        return f'''def get{atribute_.capitalize()}(self):
+        return f'''def get{first_letter_uppercase(atribute_)}(self):
     return self.__{atribute_}'''
     else:
-        return f'''def get{atribute_.capitalize()}(self):
+        return f'''def get{first_letter_uppercase(atribute_)}(self):
     return self.{atribute_}'''
     
 def setter_ (atribute_:str, is_private:bool = False):
     if is_private: 
-        return f'''def set{atribute_.capitalize()}(self, {atribute_}):
+        return f'''def set{first_letter_uppercase(atribute_)}(self, {atribute_}):
     self.__{atribute_} = {atribute_}'''
     else:
-        return f'''def set{atribute_.capitalize()}(self, {atribute_}):
+        return f'''def set{first_letter_uppercase(atribute_)}(self, {atribute_}):
     self.{atribute_} = {atribute_}'''
 
 def list_atts():
