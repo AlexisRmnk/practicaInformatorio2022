@@ -1,7 +1,6 @@
-from decimal import Decimal
+dict1 = {0: "0", 1:"1", 2:"2"}
+dict1_copy = dict1.copy()
 
-a = Decimal("55.2")
-
-print(f"x1: {a / Decimal('10')}")
-print(f"x2: {a // Decimal('10')}")
-print(f"x3: {a % Decimal('10')}")
+print(f"dict1: {dict1} - dict1_copy: {dict1_copy}")
+dict1[1] = "otra cosa"
+print(f"dict1: {dict1} - dict1_copy: {dict1_copy}")

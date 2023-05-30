@@ -8,22 +8,21 @@
 
 lista = [1, True, 3]
 item = lista[0]
-print(id(item))
+print(id(item)) # 2472082800880
 item = lista[1]
-print(id(item))
+print(id(item)) # 140711200336744
 item = lista[2]
-print(id(item))
+print(id(item)) # 2472082800944 
 
 print("")
-print(id(lista[0]))
-print(id(lista[1]))
-print(id(lista[2]))
+print(id(lista[0])) # 2472082800880
+print(id(lista[1])) # 140711200336744
+print(id(lista[2])) # 2472082800944
 
 print("")
-print(id(1))
-print(id(True))
-print(id(3))
-
+print(id(1)) # 2472082800880
+print(id(True)) # 140711200336744
+print(id(3)) # 2472082800944
 
 # saber los atributos de un objeto cualquiera con dir
 # por ej: objeto iterable range
@@ -77,59 +76,59 @@ print(type(b)) # int
 # DESEMPAQUETADO EXTENDIDO
 # basicamente sirve para indicar que se recibira una lista de valores, se puede ocupar en cualquier parte del desempaquetado. EJ:
 *a, b, c = "python"
-print("a: ", a)
-print("b: ", b)
-print("c: ", c)
-print("")
+print("a: ", a) # a:  ['p', 'y', 't', 'h'] 
+print("b: ", b) # b:  o 
+print("c: ", c) # c:  n 
+print("") 
 
 a2, *b2, c2 = "python"
-print("a2: ", a2)
-print("b2: ", b2)
-print("c2: ", c2)
-print("")
+print("a2: ", a2) # a2:  p 
+print("b2: ", b2) # b2:  ['y', 't', 'h', 'o'] 
+print("c2: ", c2) # c2:  n 
+print("")   
 
 a3, b3, *c3 = "python"
-print("a3: ", a3)
-print("b3: ", b3)
-print("c3: ", c3)
-print("\n")
+print("a3: ", a3) # a3:  p 
+print("b3: ", b3) # b3:  y 
+print("c3: ", c3) # c3:  ['t', 'h', 'o', 'n'] 
+print("\n") 
 
 # caso con IGUAL CANTIDAD de elementos en el objeto iterable (cadena en este ejemplo)
 *a4, b4, c4 = "abc"
-print("a4: ", a4)
-print("b4: ", b4)
-print("c4: ", c4)
-print("")
+print("a4: ", a4) # a4:  ['a']
+print("b4: ", b4) # b4:  b
+print("c4: ", c4) # c4:  c
+print("")  
 
 a5, *b5, c5 = "abc"
-print("a5: ", a5)
-print("b5: ", b5)
-print("c5: ", c5)
-print("")
+print("a5: ", a5) # a5:  a
+print("b5: ", b5) # b5:  ['b']
+print("c5: ", c5) # c5:  c
+print("") 
 
 a6, b6, *c6 = "abc"
-print("a6: ", a6)
-print("b6: ", b6)
-print("c6: ", c6)
-print("\n")
+print("a6: ", a6) # a6:  a
+print("b6: ", b6) # b6:  b
+print("c6: ", c6) # c6:  ['c']
+print("\n")  
 
 # caso con MENOS elementos en el objeto iterable (cadena en este ejemplo)
 *a7, b7, c7 = "de"
-print("a7: ", a7)
-print("b7: ", b7)
-print("c7: ", c7)
-print("")
+print("a7: ", a7) # a7:  []
+print("b7: ", b7) # b7:  d
+print("c7: ", c7) # c7:  e
+print("") 
 
 a8, *b8, c8 = "de"
-print("a8: ", a8)
-print("b8: ", b8)
-print("c8: ", c8)
-print("")
+print("a8: ", a8) # a8:  d
+print("b8: ", b8) # b8:  []
+print("c8: ", c8) # c8:  e
+print("") 
 
 a9, b9, *c9 = "de"
-print("a9: ", a9)
-print("b9: ", b9)
-print("c9: ", c9)
+print("a9: ", a9) # a9:  d
+print("b9: ", b9) # b9:  e
+print("c9: ", c9) # c9:  []
 
 
 # Desempaquetado con for
@@ -159,7 +158,14 @@ print(" all(tf): ", all(tf), end="\n")
 print(" any(t): ", any(t))
 print(" any(f): ", any(f))
 print(" any(tf): ", any(tf), end="\n")
-
+'''
+    all(t):  True
+    all(f):  False
+    all(tf):  False
+    any(t):  True
+    any(f):  False
+    any(tf):  True
+'''
 
 # zip puede usarse para generar un iterador y recorrer a la vez varios objetos iterables
 iterable1 = "abc"
@@ -197,7 +203,7 @@ def def_product(x, y):
     return (x * y)
 
 iterable = [1, 2, 3, 4]
-iterable2 = [10, 100, 1000] #al no poner un elemento mas, esto solo va a iterar 3 veces
+iterable2 = [10, 100, 1000] # al no poner un elemento mas, esto solo va a iterar 3 veces
 m2 = map(def_product, iterable, iterable2)
 for i in m2:
     print(i)
@@ -236,14 +242,13 @@ print(f"dict1: {dict1} - dict1_copy: {dict1_copy}")
 # exit()
 
 
-#como escribir comillas en una cadena
+#como escribir comillas en una cadena (escape characters)
 cadena = " \" "; cadena = ' " '
 
 
 #como leer un archivo en excel
 import pandas as pd
 df = pd.read_excel('file.xlsx')
-
 
 
 # como operar con decimales sin problemas
@@ -253,6 +258,7 @@ a = Decimal("55.2")
 print(f"x1: {a / Decimal('10')}")
 print(f"x2: {a // Decimal('10')}")
 print(f"x3: {a % Decimal('10')}")
+
 
 
     
