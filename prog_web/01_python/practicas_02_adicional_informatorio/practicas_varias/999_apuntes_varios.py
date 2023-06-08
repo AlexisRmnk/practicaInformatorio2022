@@ -13,6 +13,29 @@ var1 = var2 = var3 = 10
 #iniciar varias variables con distintos valores (usando desempaquetado)
 var1v2, var2v2, var3v2 = 10, 20, 30
 
+#guardar texto largo
+str_largo_1 = '''
+This is a long string
+that spans multiple lines.
+It can contain any characters,
+including special characters
+and line breaks. '''
+
+str_largo_2 = """
+This is a long string
+that spans multiple lines.
+It can contain any characters,
+including special characters
+and line breaks. """
+
+# Usando secuencias de escape (escape sequences)
+str_largo_3 = "This is a long string \
+that spans multiple lines. \
+It can contain any characters, \
+including special characters \
+and line breaks."
+
+
 
 #operadores aritmeticos + - * / // % **
 potencia_cuadrada = 5 ** 2 # resultado 25
