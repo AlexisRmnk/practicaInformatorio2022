@@ -1,12 +1,17 @@
 # Anotaciones varias. 
-# camel_case para Clases - MAYUSCULAS para constantes - snake_case para todo lo demas
+# camelCase para Clases - MAYUSCULAS para constantes - snake_case para todo lo demas
 
 #guardar dato de entrada teclado en variable
 nombre = input("INGRESE SU NOMBRE: ")
 
 # MOSTRAR MENSAJE POR PANTALLA, 2 formas
-print("Su nombre es", nombre, " y tiene", len(nombre), "caracteres.")
+print("Su nombre es", nombre, "y tiene", len(nombre), "caracteres.")
 print(f"Su nombre es {nombre} y tiene {len(nombre)} caracteres.")
+
+# probando con format, funcion de 'string'
+txt_format = 'Su nombre es {nombre_0} y tiene {long:.2f} caracteres.'
+print(txt_format.format(nombre_0 = nombre, long = len(nombre)))
+
 
 #iniciar varias variables con un unico valor
 var1 = var2 = var3 = 10
@@ -28,7 +33,7 @@ It can contain any characters,
 including special characters
 and line breaks. """
 
-# Usando secuencias de escape (escape sequences)
+# Usando secuencias de escape (escape sequences) - no tiene saltos de linea
 str_largo_3 = "This is a long string \
 that spans multiple lines. \
 It can contain any characters, \
@@ -37,7 +42,7 @@ and line breaks."
 
 
 
-#operadores aritmeticos + - * / // % **
+#operadores aritmeticos    +   -   *   /   //   %   **
 potencia_cuadrada = 5 ** 2 # resultado 25
 division_real = 19/3 # da de resultado 6.33 periodico
 division_entera = 19//3 # da de resultado 6
@@ -47,9 +52,9 @@ modulo_division = 19 % 3 # da de resultado el resto de hacer 19/3, es decir "1"
 # operadores logicos AND OR NOT XOR
 # operadores CON CADENAS * y +
 
-# podemos corroborar el tipo de una variable con el comando type(variable)
+# podemos corroborar la clase (o tipo) de una variable con el comando type(variable)
 entero = 10
-print(type(entero))
+print( type(entero) )
 
 # tipos de variables: 
 # conjunto - NO TIENE ELEMENTOS QUE SE REPITEN
@@ -345,6 +350,7 @@ indet_nombre(**diccionario_x1)
 
 # type hints (sigue funciones)
 # https://docs.python.org/3/library/typing.html
+# https://towardsdatascience.com/12-beginner-concepts-about-type-hints-to-improve-your-python-code-90f1ba0ac49
 # se puede indicar mediante una pista el tipo de dato esperado para una funcion
 # esto es interpretable por el VS Code
 def funcion5(quiero_lista : list, quiero_lista_de_strings : list[str]):

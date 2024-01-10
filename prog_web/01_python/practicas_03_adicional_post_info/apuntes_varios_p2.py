@@ -260,5 +260,25 @@ print(f"x2: {a // Decimal('10')}")
 print(f"x3: {a % Decimal('10')}")
 
 
+# uso de etiquetas de comentarios especiales en VS CODE
+# TODO: para marcar algo que se debe comletar en el futuro
+# FIXME: para marcar el codigo especifico que requiere arreglo
+# NOTE: para anotar algo de forma resaltada
+# HACK: para arreglo temporales
+# XXX: para marcar codigo que se puede mejorar, documentar u optimizar
+# REVIEW: (no coloreado nativamente por VS CODE) para marcar codigo que requiere revision
 
-    
+
+
+
+# test impresion paths
+# funciona en Jupyter Notebook (.ipynb) Y en archivo python (.py)
+import sys
+print(r"IMPRIMIENDO PATH ############################################")
+print(sys.path[0])
+print(r"#############################################################")
+
+# funciona solo en archivo python (.py)
+import os
+directorio_actual = os.path.dirname(os.path.abspath(__file__))
+print(directorio_actual)
