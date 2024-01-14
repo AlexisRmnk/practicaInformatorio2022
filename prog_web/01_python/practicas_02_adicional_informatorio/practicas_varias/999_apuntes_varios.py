@@ -87,6 +87,17 @@ print('diccionarioTest[False]', diccionarioTest[False])
 print('diccionarioTest[1]', diccionarioTest[1])
 print('diccionarioTest["dos"]', diccionarioTest["dos"])
 
+# Nota: aparentement tambien se puede usar cualquier linea de comando de forma 
+#'continua' con '\'. Aunque no podes poner nada luego del escape sequence '\'
+x = 10 + 10 + 10 \
++ 10 + 10
+# x vale 50
+
+x = 10 + 10 + 10 
++ 10 + 10
+# x vale 30
+
+
 # Python incorpora un quinto tipo de dato que estrictamente hablando 
 # se llama ​NoneType ​y cuyo único valor posible es None.
 
@@ -170,6 +181,7 @@ elif(condicion_verdadera):
 elif(condicion_falsa):
     print("...")
 
+
 # REPETITIVAS
 # Cada conjunto de instrucciones a ejecutar se denomina BUCLE.
 #  Y cada repetición del bucle se llama ITERACIÓN
@@ -211,7 +223,14 @@ for elemento in lista_auxiliar:
     i+=1
 print("Fin FOR")
 
-    # for con tipos "range()"
+# sin contador aux
+lista_auxiliar = ["a", "b", 1, 2, 3]
+for i,elemento in enumerate(lista_auxiliar):
+    print(f"El elemento numero {i} de la lista es {elemento}") #{lista_auxiliar[i]}")
+    i+=1
+print("Fin FOR")
+
+    # FOR con tipos "range()"
 for i in range(5):
     print(f"i = {i} ", end="")
 
@@ -326,20 +345,70 @@ print(f"{x} + {x} = {r1}")
 print(f"{x} * {x} = {r2}")
 
 
+# FUNCIONES COMO ARGUMENTO
+# pasando una funcion como parametro de otra funcion.
+# En este ejemplo paso la funcion 'condicion' que permite 
+# filtrar en otra funcion segun alguna condicion 'x'.
+# https://www.youtube.com/watch?v=YgXnSWG2_AY&list=PLF8hyxwQo59jdYDjY4dpseCdsANSakqT3&index=13
+def filtro(numeros, condicion):
+    '''
+        Toma una lista de numeros como primer parametro y una funcion 
+        de condicion para el filtro en el segundo parametro.
+    '''
+    resultado = list()
+    for numero in numeros:
+        if condicion(numero):
+            resultado.append(numero)
+    return resultado
+
+numeros = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+def es_par(x):
+    return x % 2 == 0
+
+def es_negativo(x):
+    return x < 0
+
+print( filtro(numeros,es_par), end='\n\n' )
+
+print( filtro(numeros,es_negativo) )
+
+# podemos usar la funcion por defecto FILTER de forma similar, solo 
+# que FILTER devuelve un ITERADOR (creo que se ve mas adelante), por lo 
+# que hay que transformarlo en lista para ver su resultado.
+# solo que tiene un orden de parametros distintos, pasar primero la funcion!
+
+filtro_1 =  filter(numeros, es_par)
+print( list(filtro_1) , end='\n\n')
+
+filtro_2 = filter(numeros, es_negativo)
+print(list(filtro_2))
+
+
+# Funciones con una cantidad indeterminada de argumentos
+# es una alternativa a pasar una lista o otro iterable como
+# argumento de una funcion.
+
+
 # Argumentos indeterminados 
 # En alguna ocasión no podremos determinar previamente cuantos elementos
 # se necesita enviar a una función. En estos casos se puede utilizar los
 # ​argumentos indeterminado​s por posición y por nombre
 
-# por posicion (lista dinamica)
+# 1) por posicion (lista dinamica)
 def indet_posicion(*args):
     '''Imprime valores pasados por parametros'''
     for arg in args:
         print(arg)
-        
+# *args es una TUPLA, en donde el operador * es de 'unpacking'
+# esa tupla va ACUMULANDO los valores que le pasamos. Siempre que 
+# estos valores no los puedan tomar otros parametros de la funcion
+#   https://www.youtube.com/watch?v=7a3d0Du3OHc&list=PLF8hyxwQo59jdYDjY4dpseCdsANSakqT3&index=13&ab_channel=CommitThatLine%21
+
 lista_x1 = [1, 2,["a","b"], 4]
 indet_posicion(*lista_x1)
 
+# 3) por nombre
 def indet_nombre(**kwargs):
     '''Imprime valores pasados por parametros'''
     for key, value in kwargs.items():
@@ -347,6 +416,8 @@ def indet_nombre(**kwargs):
         
 diccionario_x1 = {"a":"A", "b": "B"}
 indet_nombre(**diccionario_x1)
+
+
 
 # type hints (sigue funciones)
 # https://docs.python.org/3/library/typing.html
