@@ -24,13 +24,28 @@ print(id(1)) # 2472082800880
 print(id(True)) # 140711200336744
 print(id(3)) # 2472082800944
 
+
+
+# detalle: de -5 a 256 el valor de id no cambia en sus re-ejecucioens
+a = id(1)
+b = id(2)
+c = id(256)
+print('no cambian:',a, b, c, sep='\n')
+
+a = id(257)
+b = id(258)
+c = id(259)
+print('si cambian:',a, b, c, sep='\n')
+
+
+
 # saber los atributos de un objeto cualquiera con dir
 # por ej: objeto iterable range
 r = range(3, 30, 4)
-print( type(r) ) # >    <class 'range'>
-print(dir(r) ) # >    ['__bool__', ... , 'count', 'index', 'start', 'step', 'stop']
-print( hasattr(r, "start") , r.start , sep=" " )
-
+print('type(r):', type(r) ) # >    <class 'range'>
+print('dir(r):', dir(r) ) # >    ['__bool__', ... , 'count', 'index', 'start', 'step', 'stop']
+print( 'hasattr(r, "start"):', hasattr(r, "start") , '| r.start: ', r.start )
+    # > hasattr(r, "start"): True | r.start:  3
 
 # Expresiones logicas OR y AND
 # usando OR y AND puedo devolver resultados de forma similar a con JS 
@@ -142,6 +157,7 @@ for iteration,[*i, j] in enumerate([ "gato", [1,2,3], "python", "perro" ]):
     print(f"iteracion {iteration}:")
     print("i: ", i)
     print("j: ", j)
+    print()
     
 
 # 'all' y 'any' permiten determinar en un iterable si:
@@ -170,7 +186,7 @@ print(" any(tf): ", any(tf), end="\n")
 # zip puede usarse para generar un iterador y recorrer a la vez varios objetos iterables
 iterable1 = "abc"
 iterable2 = [1, 2, 3]
-iterable3 = (True, False, None, "(no se imprime, ver abajo nota)")
+iterable3 = (True, False, None, "(no se imprime, ver abajo nota 'A')")
 
 z = zip(iterable1, iterable2, iterable3)
 for item in z:
@@ -179,7 +195,7 @@ for item in z:
 #('b', 2, False)
 #('c', 3, None)
 
-#nota: no se imprime nada mas porque solo se itera el minimo posible
+# nota 'A': no se imprime nada mas porque solo se itera el minimo posible
 
 
 # map() sirve para ejecutar una funcion para una serie de elementos en un iterable
@@ -213,8 +229,9 @@ for i in m2:
 # funcion, y filtrar aquellos que NO sean False o un equivalente
 def def_checks_even_n(x):
     return (not x%2) #devuelve True si X es par
+    # nota: el not me transforma el 1 o 0 en booleano
 
-iterable = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] #pude haber hecho con range(10)
+iterable = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] # pude haber hecho con range(10)
 f = filter( def_checks_even_n, iterable)
 
 for item in f:
@@ -226,7 +243,7 @@ for item in f:
 for i in filter(None, range(-5, 5, 1)):
     print(i)
 # en este caso imprime -5  -4  -3  -2  -1  1  2  3  4
-# (saltea el 0, considerado FALSE)
+# Saltea el 0. Esto supongo que es porque el filtro lo considera FALSE directamente
 
 
 # copiar un diccionario de forma correcta
@@ -246,7 +263,7 @@ print(f"dict1: {dict1} - dict1_copy: {dict1_copy}")
 cadena = " \" "; cadena = ' " '
 
 
-#como leer un archivo en excel
+#como leer un archivo en excel (Libreria PANDAS)
 import pandas as pd
 df = pd.read_excel('file.xlsx')
 

@@ -1,5 +1,5 @@
 # Anotaciones varias. 
-# camelCase para Clases - MAYUSCULAS para constantes - snake_case para todo lo demas
+# CamelCase para Clases - MAYUSCULAS para constantes - snake_case para todo lo demas
 
 #guardar dato de entrada teclado en variable
 nombre = input("INGRESE SU NOMBRE: ")
@@ -419,6 +419,28 @@ indet_nombre(**diccionario_x1)
 
 
 
+
+# orden en el que se escriben los parametros para una funcion por defecto:
+# https://youtu.be/49eS__KMlpo?si=ZK54Njc7qYjeasQP&t=335
+def funcion_argumentos(
+    argumento1, argumento2, # argumentos posicionales
+    *args_indeterminados_por_posicion, 
+    arg_defecto_1=True, arg_defecto_2='Manzana',
+    **kwargs_indeterminados_por_nombre
+):
+    print(argumento1, ' | ', argumento2)
+    for arg in args_indeterminados_por_posicion:
+        print(arg)
+    print(arg_defecto_1, arg_defecto_2)
+    for key,value in kwargs_indeterminados_por_nombre.items():
+        print('key: ',key,' | value: ',value)
+
+
+funcion_argumentos('arg1', 'arg2', 1, 2, 3, 4, 5, arg_defecto_2='No es una manzana',
+                   uno=1, dos=2, tres=3)
+
+
+
 # type hints (sigue funciones)
 # https://docs.python.org/3/library/typing.html
 # https://towardsdatascience.com/12-beginner-concepts-about-type-hints-to-improve-your-python-code-90f1ba0ac49
@@ -616,10 +638,10 @@ print(f"El 3 aparece {lista_nueva.count(3)} veces en la lista")
 # conocer indice de elemento(solo devuelve la primer coincidencia!)
 print(lista_nueva.index(3))
 
-#eliminar elemento (por indice con DEL y por elemento con REMOVE)
+# eliminar elemento (por indice con DEL y por elemento con REMOVE)
 del lista_nueva[0]
 del lista_nueva[1:4] # borra elementos del indice 1 al 3 incluido (4 sin incluir)
-lista_nueva.remove(99) #borra el elemento "99". SOLO LA PRIMERA COINCIDENCIA!
+lista_nueva.remove(99) # borra el elemento "99". SOLO LA PRIMERA COINCIDENCIA!
 lista_nueva_ultimo_elemento = lista_nueva.pop()
 lista_nueva_segundo_elemento = lista_nueva.pop(1) # elemento en posicion 1
 
@@ -646,7 +668,7 @@ print(thislist)
 
 
 x = [0,1,2,3,4,5,6,7,8,9]
-# manejo de listas similar a los parametros de range(star, stop, step) stop=index
+# manejo de listas similar a los parametros de range(start, stop, step) stop=index
 sliced = x[1:8:2]
 print(sliced) # [1, 3, 5, 7]
 
@@ -891,11 +913,11 @@ bandera = False
 while(True):  
     try:
         n = float(input("Introduce un número: "))
-        m = 4
+        m = float(4)
     #   print("{}/{} = {}".format(n,m,n/m))
         print(f"{n}/{m} = {n/m}")
     except:
-        print("Ha ocurrido un error, introduce bien el número")
+        print("Ha ocurrido un error, introduce bien el número") 
     else:
         print("Todo ha funcionado correctamente")
         bandera = True
@@ -912,7 +934,10 @@ try:
     n = input("Introduce un número: ") # no transformamos a número
     x = 5/n                                                 # type: ignore
 except Exception as e: # guardamos la excepción como una variable 'e'
-    print("Ha ocurrido un error =>", type(e).__name__) # TypeError
+    print("Ha ocurrido un error =>", e) # unsupported operand type(s) for /: 
+    #                                     'int' and 'str'
+    print("Tipo de error:", type(e).__name__) # TypeError 
+    #                                           nos indica el tipo de error
 
 # Gracias a los identificadores de errores podemos crear múltiples
 #  comprobaciones, siempre que dejemos en último lugar la excepción
@@ -944,7 +969,7 @@ def funcion01(valor_no_nulo = None):
         print("Esta parte de codigo NO se ejecuta.")
     except ValueError:
         print("Error! No se permite un valor nulo (desde la excepción)")
-
+funcion01()		
 
 
 
@@ -954,13 +979,14 @@ def funcion01(valor_no_nulo = None):
 # POO
 # Nota: escribir nombre de las clases en CamelCase (inicio con mayusculas!)
 
-class Producto: #si el nombre fuera mas largo se podria usar ProductoPrincipal
+class Producto: # si el nombre fuera mas largo se podria usar ProductoPrincipal,
                 # por ejemplo
 
     # metodo constructor, siempre se ejecuta al crear el objeto
     # los metodos son esencialmente funciones dentro de objetos
     # aplican las mismas reglas (valores por defecto, etc)
     def __init__(self, nombre, precio : float, stock = 0):
+        'Crea una instancia de producto'
         self.name = nombre
         self.price = precio
         self.stock = stock
@@ -978,6 +1004,12 @@ class Producto: #si el nombre fuera mas largo se podria usar ProductoPrincipal
 
     def devolver_stock(self):
         return self.stock
+    
+    def mostrar_todo(self):
+        self.mostrar_nombre()
+        print(f'Precio: $ {self.price}')
+        self.mostrar_stock()
+        print(f'Marca: {self.marca}', end='\n\n')
 
 # INSTANCIACION
 # Forma similar a hacer
@@ -986,6 +1018,9 @@ class Producto: #si el nombre fuera mas largo se podria usar ProductoPrincipal
 producto1 = Producto("Tornillo", 23.5, 5)
 producto2 = Producto("Destornillador", 10, ) # ejemplo tomando valor por
 #                                              defecto para el stock
+
+producto1.mostrar_todo()
+producto2.mostrar_todo()
 
 # ejemplo, como en funciones, definimos el nombre del parametro al que hacemos
 #   referencia
@@ -1074,12 +1109,12 @@ class Ejemplo2:
     def setAtt3(self, att3):
         self.att3 = att3
         
-# Nota: Podes utilizar el atributo especial de clase name para recuperar el
-#   nombre de la clase de un objeto:      type(objeto).__name__
 # Nota: hice un programa que genera estos automaticamente en 
 # D:\CURSOS\Informatorio\INFORMATORIO2022\prog_web
 #   \01_python\practicas_02_adicional_informatorio\
 #   practicas_varias\auto_getters_setters_py\auto_getter_setter.py
+# Nota: Podes utilizar el atributo especial de clase name para recuperar el
+#   nombre de la clase de un objeto:      type(objeto).__name__
 
 
 # HERENCIA
