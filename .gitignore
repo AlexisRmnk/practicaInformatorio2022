@@ -1,5 +1,11 @@
+# gitignore manual
 local/
+notas_local.txt
 
+
+
+
+# codigo autogenerado
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,python
@@ -196,5 +202,3 @@ pyrightconfig.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
-
-notas_local.txt
