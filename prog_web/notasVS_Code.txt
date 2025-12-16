@@ -72,4 +72,6 @@ para el caso especifico de python, se puede configurar la extension PYLANCE para
 detectar diferencias de tipos
 # https://www.emmanuelgautier.com/blog/enable-vscode-python-type-checking
 
+update 2025-12-16: ahora podemos buscar 'Pylance' en las extensiones de vscode,
+ir a la configuracion de pylance y una vez ahi buscar la opcion Type Checking Mode
  

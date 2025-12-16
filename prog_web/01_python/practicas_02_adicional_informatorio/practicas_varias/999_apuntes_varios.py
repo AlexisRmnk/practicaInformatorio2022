@@ -40,7 +40,11 @@ It can contain any characters, \
 including special characters \
 and line breaks."
 
-
+# ejemplo de escape sequences
+x_escape_seq = 1 + 1 + 1 + \
+    1 + 1 \
+    + 1
+print(x_escape_seq) # resultado 6
 
 #operadores aritmeticos    +   -   *   /   //   %   **
 potencia_cuadrada = 5 ** 2 # resultado 25
@@ -50,7 +54,7 @@ modulo_division = 19 % 3 # da de resultado el resto de hacer 19/3, es decir "1"
 
 # operadores de comparacion > >= < <= == !=
 # operadores logicos AND OR NOT XOR
-# operadores CON CADENAS * y +
+# operadores CON CADENAS * y +   ejemplo: 3*'A' ('AAA') , 'A'+'B' ('AB')
 
 # podemos corroborar la clase (o tipo) de una variable con el comando type(variable)
 entero = 10
