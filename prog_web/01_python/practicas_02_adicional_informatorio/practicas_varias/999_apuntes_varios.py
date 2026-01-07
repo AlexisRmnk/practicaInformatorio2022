@@ -40,7 +40,7 @@ It can contain any characters, \
 including special characters \
 and line breaks."
 
-# ejemplo de escape sequences
+# ejemplo de escape sequences en un comando
 x_escape_seq = 1 + 1 + 1 + \
     1 + 1 \
     + 1
@@ -91,16 +91,6 @@ print('diccionarioTest[False]', diccionarioTest[False])
 print('diccionarioTest[1]', diccionarioTest[1])
 print('diccionarioTest["dos"]', diccionarioTest["dos"])
 
-# Nota: aparentement tambien se puede usar cualquier linea de comando de forma 
-#'continua' con '\'. Aunque no podes poner nada luego del escape sequence '\'
-x = 10 + 10 + 10 \
-+ 10 + 10
-# x vale 50
-
-x = 10 + 10 + 10 
-+ 10 + 10
-# x vale 30
-
 
 # Python incorpora un quinto tipo de dato que estrictamente hablando 
 # se llama ​NoneType ​y cuyo único valor posible es None.
@@ -135,6 +125,8 @@ if ("mundo" in txt_):
     print("'mundo' existe en txt_")
 if ("auto" not in txt_):
     print("'auto' no existe en txt_")
+
+# SLICING
 # You can return a range of characters by using the slice syntax
 # Get the characters from position 2 to position 5 (not included):
 print(txt_[2:5]) # 'la '
@@ -234,7 +226,7 @@ for i,elemento in enumerate(lista_auxiliar):
     i+=1
 print("Fin FOR")
 
-    # FOR con tipos "range()"
+# FOR con tipos "range()"
 for i in range(5):
     print(f"i = {i} ", end="")
 
@@ -267,9 +259,9 @@ while var > 0:
     print("Valor actual de la variable :", var)
 
 # Sentencia continue
-# Al aparecer un ​continue ​en Python, este regresa al comienzo del bucle,
-# ignorando todos los estamentos que quedan en la iteración actual del
-# bucle e inicia la siguiente iteración. 
+# Al aparecer un continue en Python, este regresa al comienzo del bucle,
+# ignorando todas las sentencias/lineas de codigo que quedan en la
+# iteración actual del bucle e inicia la siguiente iteración.
 
 for letra in "Python":
     if letra == "h":    
@@ -412,7 +404,7 @@ def indet_posicion(*args):
 lista_x1 = [1, 2,["a","b"], 4]
 indet_posicion(*lista_x1)
 
-# 3) por nombre
+# 2) por nombre
 def indet_nombre(**kwargs):
     '''Imprime valores pasados por parametros'''
     for key, value in kwargs.items():
@@ -427,7 +419,7 @@ indet_nombre(**diccionario_x1)
 # orden en el que se escriben los parametros para una funcion por defecto:
 # https://youtu.be/49eS__KMlpo?si=ZK54Njc7qYjeasQP&t=335
 def funcion_argumentos(
-    argumento1, argumento2, # argumentos posicionales
+    argumento1, argumento2, # argumentos posicionales (obligatorios al invocar la funcion)
     *args_indeterminados_por_posicion, 
     arg_defecto_1=True, arg_defecto_2='Manzana',
     **kwargs_indeterminados_por_nombre
@@ -443,6 +435,111 @@ def funcion_argumentos(
 funcion_argumentos('arg1', 'arg2', 1, 2, 3, 4, 5, arg_defecto_2='No es una manzana',
                    uno=1, dos=2, tres=3)
 
+###############################################################################
+###############################################################################
+###############################################################################
+# ejemplo completo hecho a mano para practicar
+def func_describe_persona(nombre, 
+              *args_nombre_mascotas, 
+              nacionalidad='Arg',
+              caracteristica=954, 
+              **kwargs_datos_extra
+):
+    print('*'*90)
+    print(f'nombre: {nombre}')
+    if args_nombre_mascotas:
+        print('nombre mascotas:')
+        i=1
+        for mascota in args_nombre_mascotas:
+            print(f'mascota {i}:',mascota)
+            i+=1
+    else:
+        print('no tiene mascotas')
+    print('Nacionalidad:',nacionalidad,'. Caract:', caracteristica)
+    if kwargs_datos_extra:
+        print('datos adicionales:')
+        for key in kwargs_datos_extra:
+            print(key, kwargs_datos_extra[key])
+    else:
+        print('no se indicaron datos adicionales')
+    print('*'*90)
+
+func_describe_persona('John','Stuart','Alonso','Asu',nacionalidad='American'
+                      ,caracteristica=999, age=29, hobbies='caminar')
+
+func_describe_persona('Juan', #'Stuart','Alonso','Asu',nacionalidad='American'
+                              #,caracteristica=999, age=29, hobbies='caminar'
+                      )
+
+func_describe_persona('Alan', 'Fidel', #nac
+                      caracteristica=7888,
+                      gustos=['vino','escalar','caminar']
+                      )
+###############################################################################
+###############################################################################
+###############################################################################
+
+
+
+###############################################################################
+###############################################################################
+###############################################################################
+# otro ejemplo completo generado con Gemini
+def resumen_evento(nombre_evento, *invitados, horario="20:00", **detalles_extra):
+    """
+    Muestra el resumen de un evento.
+    
+    1. nombre_evento: Posicional (Obligatorio).
+    2. *invitados: Recoge todos los nombres extra que pasemos (Tupla).
+    3. horario: Valor por defecto. IMPORTANTE: Al estar después de *args,
+       se convierte en un argumento 'keyword-only' (solo modificable por nombre).
+    4. **detalles_extra: Recoge cualquier par clave=valor sobrante (Diccionario).
+    """
+    
+    print(f"--- REPORTE DEL EVENTO: {nombre_evento.upper()} ---")
+    
+    # 1. Mostrar invitados (provenientes de *args)
+    if invitados:
+        print(f"Asistentes ({len(invitados)} personas):")
+        for persona in invitados:
+            print(f" - {persona}")
+    else:
+        print(" -> No hay lista de invitados específica.")
+
+    # 2. Mostrar horario (proveniente del valor por defecto o modificado)
+    print(f"Horario confirmado: {horario}")
+
+    # 3. Mostrar detalles extra (provenientes de **kwargs)
+    if detalles_extra:
+        print("Información adicional:")
+        for clave, valor in detalles_extra.items():
+            print(f" - {clave}: {valor}")
+    
+    print("-" * 40 + "\n")
+
+
+# CASO 1: Uso básico (solo lo obligatorio + args)
+# 'Cena' va a nombre_evento
+# 'Juan', 'Ana', 'Luis' son capturados por *invitados
+# horario usa el default "20:00"
+# detalles_extra queda vacío
+resumen_evento("Cena de equipo", "Juan", "Ana", "Luis")
+
+
+# CASO 2: Modificando el valor por defecto y añadiendo extras
+# Nota como para cambiar el horario, ESTOY OBLIGADO a poner 'horario=' explícitamente
+# porque *invitados se "come" todo lo que sea posicional.
+resumen_evento(
+    "Hackathon",           # nombre_evento
+    "Pedro", "Maria",      # *invitados
+    horario="09:00 AM",    # Argumento por defecto modificado (Keyword-only)
+    ubicacion="Oficina",   # **detalles_extra
+    requiere_laptop=True,  # **detalles_extra
+    comida="Pizza"         # **detalles_extra
+)
+###############################################################################
+###############################################################################
+###############################################################################
 
 
 # type hints (sigue funciones)
@@ -451,7 +548,7 @@ funcion_argumentos('arg1', 'arg2', 1, 2, 3, 4, 5, arg_defecto_2='No es una manza
 # se puede indicar mediante una pista el tipo de dato esperado para una funcion
 # esto es interpretable por el VS Code
 def funcion5(quiero_lista : list, quiero_lista_de_strings : list[str]):
-    pass
+    pass # Para evitar errores cuando la funcion no hace nada
 lista = [1, 2, 3]
 lista_strings = ["1", "2", "3"]
 funcion5(lista, lista_strings)
@@ -489,7 +586,7 @@ recibe_lista_anidada(lista_anid)
 # https://www.emmanuelgautier.com/blog/enable-vscode-python-type-checking
 
 # por ultimo, tambien se puede indicar el tipo de una variable usando 
-# comentarios.  Ej:
+# comentarios ( #type: ).  Ej:
 def funcion_test():
     diccionario_nuevo = dict() #type: dict[int, str]
     # esto indica que diccionario_nuevo sera un diccionario con claves de tipo "int"
@@ -532,6 +629,33 @@ saved for later use.
 # syntax:   lambda arguments: expression
 sum = lambda x, y: x + y
 print(sum(2, 3))  # Output: 5
+
+
+
+# ejemplo de practica mio
+def su_suma_es_par(numero1,numero2):
+    if ( (numero1+numero2) % 2 == 1):
+        return False
+    else:
+        return True
+
+print('(2 + 1) es par?', su_suma_es_par(2,1))
+print('(3 + 3) es par?', su_suma_es_par(3,3))
+print('(4 + 3) es par?', su_suma_es_par(4,3))
+print('(5 + 1) es par?', su_suma_es_par(5,1))
+
+# ejemplo lambda
+lmbd_suma_par = lambda n1,n2: (n1+n2) % 2 == 1
+print('lmbd (2 + 1) es par?', lmbd_suma_par(2,1))
+print('lmbd (3 + 3) es par?', lmbd_suma_par(3,3))
+print('lmbd (4 + 3) es par?', lmbd_suma_par(4,3))
+print('lmbd (5 + 1) es par?', lmbd_suma_par(5,1))
+# esto NO ES UNA BUENA PRACTICA, ya que para hacer funciones asi usariamos 'def'
+
+
+# Las lambdas brillan cuando necesitas pasar una función como argumento a otra función (funciones de orden superior)
+
+
 
 
 
