@@ -1,10 +1,7 @@
 
-lista_nueva = [1, 2, 3, 4, 5, 6]
-
-print('lista nueva:',lista_nueva)
-lista_nueva_ultimo_elemento = lista_nueva.pop()
-print('lista_nueva_ultimo_elemento',lista_nueva_ultimo_elemento)
-print('lista nueva:',lista_nueva)
-lista_nueva_segundo_elemento = lista_nueva.pop(1)
-print('lista_nueva_segundo_elemento',lista_nueva_segundo_elemento)
-print('lista nueva:',lista_nueva)
+frutas = ["Manzana", "manzana", "PERA", "Pera", "pera", "Uva"]
+# Convertimos todo a minúscula dentro del set comprehension
+frutas_unicas = {f.lower() for f in frutas}
+print(frutas_unicas)
+list_frutas_unicas = list(frutas_unicas)
+print(list_frutas_unicas)
