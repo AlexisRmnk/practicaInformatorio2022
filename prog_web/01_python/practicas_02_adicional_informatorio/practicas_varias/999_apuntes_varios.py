@@ -616,7 +616,10 @@ from archivo_funciones import *
 #               [practicas_varias\importarPracticas\funciones_1.py]
 
 
-# lambda functions
+########################################################################
+########################################################################
+
+# LAMBDA FUNCTIONS
 # asked to IA https://www.phind.com/
 '''
 In Python, a lambda function is a small, anonymous function that can
@@ -653,7 +656,116 @@ print('lmbd (5 + 1) es par?', lmbd_suma_par(5,1))
 # esto NO ES UNA BUENA PRACTICA, ya que para hacer funciones asi usariamos 'def'
 
 
+# ejemplo y explicaciones, hecho con IA Gemini:
 # Las lambdas brillan cuando necesitas pasar una función como argumento a otra función (funciones de orden superior)
+
+# Para entender cómo map o filter usan lambdas, vamos a crear nosotros mismos una función que acepte una lambda.
+# Imagina una "Calculadora Universal". Esta calculadora no sabe sumar ni restar, solo sabe recibir dos números y aplicarles una operación que tú le des.
+
+'Paso 1: Definir la función receptora (Orden Superior)'
+def calculadora_universal(a, b, operacion):
+    """
+    a: primer número
+    b: segundo número
+    operacion: ¡Una función que le pasaremos desde fuera!
+    """
+    print(f"Recibí los números {a} y {b}")
+    print("Ahora voy a ejecutar la operación que me diste...")
+    
+    # AQUÍ ES DONDE OCURRE LA MAGIA
+    resultado = operacion(a, b) 
+    # Python toma el argumento 'operacion' y lo usa como una función.
+    
+    return resultado
+
+'Paso 2: Usarla con una Lambda'
+#Ahora llamamos a nuestra calculadora pasándole los números y, en el tercer argumento, inyectamos la lógica usando una lambda.
+
+# Caso A: Usarla para SUMAR
+res_suma = calculadora_universal(5, 3, lambda x, y: x + y)
+print(f"Resultado Suma: {res_suma}") 
+print("---")
+# Caso B: Usarla para MULTIPLICAR
+res_multi = calculadora_universal(5, 3, lambda x, y: x * y)
+print(f"Resultado Multiplicación: {res_multi}")
+
+''' ¿Por qué es esto tan potente?
+Si no pudieras pasar funciones como argumentos, tendrías que escribir una función diferente para cada caso:'''
+# sumar_numeros(a, b)
+# restar_numeros(a, b)
+# multiplicar_numeros(a, b)
+''' Al usar funciones de orden superior y lambdas, escribes la lógica del flujo una sola vez (calculadora_universal o map) y cambias el comportamiento "al vuelo" inyectando pequeñas lambdas. '''
+
+## EJEMPLOS de uso de lambdas comunes
+
+# 1) filter espera una función que devuelva True o False para decidir qué elementos quedarse de una lista.
+# Objetivo: Obtener solo los números pares de una lista.
+
+numeros = [1, 2, 3, 4, 5, 6]
+# Sin lambda tendrías que definir una función aparte
+pares = list(filter(lambda x: x % 2 == 0, numeros))
+print(pares) # [2, 4, 6]
+
+# 2) map aplica una función a todos los elementos de una lista.
+# Objetivo: Duplicar el valor de cada número.
+numeros = [1, 2, 3, 4]
+dobles = list(map(lambda x: x * 2, numeros))
+print(dobles) # [2, 4, 6, 8]
+
+
+# 3) Sorted. A veces quieres ordenar una lista de formas complejas, por ejemplo, ordenar una lista de tuplas basándote en el segundo elemento.
+# Objetivo: Ordenar productos por precio (el segundo valor).
+productos = [
+    ('Leche', 1.50),
+    ('Pan', 1.00),
+    ('Huevos', 2.50)
+]
+# Ordenamos basándonos en el índice 1 (el precio)
+productos_ordenados = sorted(productos, key=lambda x: x[1])
+print(productos_ordenados)
+# [('Pan', 1.0), ('Leche', 1.5), ('Huevos', 2.5)]
+
+# 4) min() y max() con el parámetro key. por defecto, max() busca el número más alto, pero... ¿y si quieres buscar el objeto con la propiedad más alta?
+# Objetivo: Encontrar la palabra más larga.
+palabras = ["python", "sol", "elefante", "pez"]
+
+# Si usamos max normal, devolvería 'sol' (por orden alfabético)
+# Pero queremos por longitud:
+palabra_larga = max(palabras, key=lambda p: len(p))
+
+print(palabra_larga) 
+# Resultado: 'elefante'
+
+
+
+# 5) reduce (acumulador)
+# A diferencia de map (que devuelve una lista), reduce toma una lista y la colapsa en un solo valor.
+'Nota: hay que importarla'
+# Funciona tomando los dos primeros elementos, aplicando la lambda, tomando el resultado y el siguiente elemento, y así sucesivamente. (Como una bola de nieve).
+# Objetivo: Multiplicar todos los números de una lista.
+
+from functools import reduce
+
+numeros = [1, 2, 3, 4]
+
+# La lambda aquí NECESITA dos argumentos: 
+# x: el acumulado hasta ahora
+# y: el nuevo número de la lista
+producto_total = reduce(lambda x, y: x * y, numeros)
+
+print(producto_total)
+# Resultado: 24 (1*2 = 2 -> 2*3 = 6 -> 6*4 = 24)
+
+# 5.1) REDUCE . Un concepto avanzado: El "Initialzer" (El tercer argumento)
+# reduce tiene un tercer argumento opcional secreto: el valor inicial. Si lo usas, reduce no empieza con los dos primeros elementos de la lista, sino con tu valor inicial y el primer elemento.
+# Ejemplo: Tienes 100 dólares en el banco y quieres sumar tus depósitos.
+
+depositos = [20, 50, 10]
+# Sin initializer empieza en 20 + 50...
+# Con initializer (100), empieza calculando 100 + 20...
+total = reduce(lambda saldo, ingreso: saldo + ingreso, depositos, 100)
+print(total) # 180 (100 inicial + 20 + 50 + 10)
+
 
 
 
