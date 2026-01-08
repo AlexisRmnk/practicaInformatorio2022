@@ -1,8 +1,10 @@
-from functools import reduce
-depositos = [20, 50, 10]
 
-# Sin initializer empieza en 20 + 50...
-# Con initializer (100), empieza calculando 100 + 20...
-total = reduce(lambda saldo, ingreso: saldo + ingreso, depositos, 100)
+lista_nueva = [1, 2, 3, 4, 5, 6]
 
-print(total) # 180 (100 inicial + 20 + 50 + 10)
+print('lista nueva:',lista_nueva)
+lista_nueva_ultimo_elemento = lista_nueva.pop()
+print('lista_nueva_ultimo_elemento',lista_nueva_ultimo_elemento)
+print('lista nueva:',lista_nueva)
+lista_nueva_segundo_elemento = lista_nueva.pop(1)
+print('lista_nueva_segundo_elemento',lista_nueva_segundo_elemento)
+print('lista nueva:',lista_nueva)

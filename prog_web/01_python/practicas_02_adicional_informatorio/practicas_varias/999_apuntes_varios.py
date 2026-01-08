@@ -845,10 +845,24 @@ lista_nueva4 = lista_nueva[2:5] #tambien se usa [:2] [2:] [:]
 
 # listas anidadas
 lista_z = [1, ["a", "b", "c"], 3, 4]
-lista_y = [[1, 2, 3], [4, 5, 6]]
-for y in lista_y:
-    prom = sum(y)/len(y)
-    print(f"El promedio de cada elemento de lista es: {prom}")
+
+# ej lista anidada gemini ia:
+# Definimos una lista que contiene otras listas (matriz)
+grupos_de_numeros = [
+    [1, 2, 3],  # Primera sublista
+    [4, 5, 6]   # Segunda sublista
+]
+# El bucle accede a cada sublista una por una
+for sublista in grupos_de_numeros:
+    # 'sublista' ahora vale [1, 2, 3] en la primera vuelta
+    # y [4, 5, 6] en la segunda vuelta.
+    suma_total = sum(sublista)      # Sumamos los números: 1+2+3 = 6
+    cantidad   = len(sublista)      # Contamos cuántos hay: 3
+    promedio   = suma_total / cantidad
+    print(f"La sublista es {sublista} y su promedio es: {promedio}")
+
+
+
 
 # copiar lista
 copia_lista = lista_nueva[:]
@@ -884,6 +898,19 @@ del lista_nueva[1:4] # borra elementos del indice 1 al 3 incluido (4 sin incluir
 lista_nueva.remove(99) # borra el elemento "99". SOLO LA PRIMERA COINCIDENCIA!
 lista_nueva_ultimo_elemento = lista_nueva.pop()
 lista_nueva_segundo_elemento = lista_nueva.pop(1) # elemento en posicion 1
+
+'ej para pruebas:'
+lista_nueva_02 = [1, 2, 3, 4, 5, 6]
+
+print('lista nueva:',lista_nueva_02)
+lista_nueva_02_ultimo_elemento = lista_nueva_02.pop()
+print('lista_nueva_02_ultimo_elemento',lista_nueva_02_ultimo_elemento)
+print('lista nueva:',lista_nueva_02)
+lista_nueva_02_segundo_elemento = lista_nueva_02.pop(1)
+print('lista_nueva_02_segundo_elemento',lista_nueva_02_segundo_elemento)
+print('lista nueva:',lista_nueva_02)
+
+
 
 #funciones de listas varias
 # sum() len() max() min()
