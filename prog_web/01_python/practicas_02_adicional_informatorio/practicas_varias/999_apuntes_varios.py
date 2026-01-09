@@ -794,6 +794,8 @@ print(total) # 180 (100 inicial + 20 + 50 + 10)
 # https://es.stackoverflow.com/questions/116372/qu%C3%A9-funci%C3%B3n-tiene-el-operador-en-python
 
 set_ = {1, 2, 3, 4} 
+'Nota: puse SET COMPREHESION mas adelante'
+
 
 
 # listas
@@ -845,10 +847,24 @@ lista_nueva4 = lista_nueva[2:5] #tambien se usa [:2] [2:] [:]
 
 # listas anidadas
 lista_z = [1, ["a", "b", "c"], 3, 4]
-lista_y = [[1, 2, 3], [4, 5, 6]]
-for y in lista_y:
-    prom = sum(y)/len(y)
-    print(f"El promedio de cada elemento de lista es: {prom}")
+
+# ej lista anidada gemini ia:
+# Definimos una lista que contiene otras listas (matriz)
+grupos_de_numeros = [
+    [1, 2, 3],  # Primera sublista
+    [4, 5, 6]   # Segunda sublista
+]
+# El bucle accede a cada sublista una por una
+for sublista in grupos_de_numeros:
+    # 'sublista' ahora vale [1, 2, 3] en la primera vuelta
+    # y [4, 5, 6] en la segunda vuelta.
+    suma_total = sum(sublista)      # Sumamos los números: 1+2+3 = 6
+    cantidad   = len(sublista)      # Contamos cuántos hay: 3
+    promedio   = suma_total / cantidad
+    print(f"La sublista es {sublista} y su promedio es: {promedio}")
+
+
+
 
 # copiar lista
 copia_lista = lista_nueva[:]
@@ -885,6 +901,19 @@ lista_nueva.remove(99) # borra el elemento "99". SOLO LA PRIMERA COINCIDENCIA!
 lista_nueva_ultimo_elemento = lista_nueva.pop()
 lista_nueva_segundo_elemento = lista_nueva.pop(1) # elemento en posicion 1
 
+'ej para pruebas:'
+lista_nueva_02 = [1, 2, 3, 4, 5, 6]
+
+print('lista nueva:',lista_nueva_02)
+lista_nueva_02_ultimo_elemento = lista_nueva_02.pop()
+print('lista_nueva_02_ultimo_elemento',lista_nueva_02_ultimo_elemento)
+print('lista nueva:',lista_nueva_02)
+lista_nueva_02_segundo_elemento = lista_nueva_02.pop(1)
+print('lista_nueva_02_segundo_elemento',lista_nueva_02_segundo_elemento)
+print('lista nueva:',lista_nueva_02)
+
+
+
 #funciones de listas varias
 # sum() len() max() min()
 # se pueden usar operadores matematicos en listas!
@@ -914,7 +943,7 @@ print(sliced) # [1, 3, 5, 7]
 
 
 
-# descubrimiento: list.copy() no funciona bien cuando la lista posee sublistas!
+# descubrimiento: list.copy() NO funciona bien cuando la lista posee sublistas!
 # para ello mejor hacer 'import copy' y usar el metodo:
 #                                            list2 = copy.deepcopy(list1)
 def demostracion():
@@ -991,13 +1020,38 @@ def demostracion():
             "copia_lista_anidada = copy.deepcopy(lista_anidada)")
 
 
+
+
+# Comparacion entre listas:
+# cuando se comparan 2 listas, la "mayor" sera la que tenga el primer elemento
+# mayor que la otra lista.
+# ejs: 
+[2] > [1, 2, 3]                                             # type: ignore
+# True 
+
+[1, 2, 2] > [1, 2, 3]                                       # type: ignore
+# False
+
+[1] < [1, 2]                                                # type: ignore
+# True
+
+a = [1, 2, 3]
+b = [1, 2, 3]
+print(a is a) # True
+b is a                                                      # type: ignore
+# False
+b == a                                                      # type: ignore
+# True
+
+
+
 # LIST COMPREHESION
 # permite crear listas a partir de iterables usando la siguiente estructura:
 #   [ 'expression' for 'elemento' in 'iterable' if 'condicion' ]
 
 #   una lista con los triples de estos numeros:
-numeros = [3, 8, 1, 9]
-triples = [x*3 for x in numeros] # "por cada X en numeros, agregame un x*3 en triples"
+lista_numeros = [3, 8, 1, 9]
+lista_triples = [x*3 for x in lista_numeros] # "por cada X en lista_numeros, agregame un x*3 en lista_triples"
 
 # ej: todos los números pares desde el 0 al 100
 pares = [x for x in range(0,101) if x % 2 == 0]
@@ -1016,6 +1070,24 @@ fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
 newlist = [x if x != "banana" else "orange" for x in fruits]
 # The expression in the example above says:
 # "Return the item if it is not banana, if it is banana return orange".
+
+
+
+
+# LIST COMPREHESION IF/ELSE (sacado con Gemini IA)
+# Si quieres cambiar el valor basándote en una condición (en lugar de filtrar), la estructura if/else va al principio, dentro de la expresion.
+# [resultado_si_verdadero if condicion else resultado_si_falso for elemento in iterable]
+
+# Ejemplo: Etiquetar pares e impares
+numeros = [1, 2, 3]
+etiquetas = ["Par" if n % 2 == 0 else "Impar" for n in numeros]
+print(etiquetas)
+# Salida: ['Impar', 'Par', 'Impar']
+
+
+
+
+
 
 
 #TUPLAS
@@ -1115,28 +1187,147 @@ print(x2) # dict_values([1, 2])
 print(x3) # dict_items([('a', 1), ('b', 2)]))
 print(x4) # sigue siendo 3 (NO ES UNA VISTA)
 
+# nota: para copiar el valor de estas 'vistas' podemos meterlos en una lista nueva por ej
+lista_claves = list(d.keys()) # x1
 
 
-# Comparacion entre listas:
-# cuando se comparan 2 listas, la "mayor" sera la que tenga el primer elemento
-# mayor que la otra lista.
-# ejs: 
-[2] > [1, 2, 3]                                             # type: ignore
-# True 
 
-[1, 2, 2] > [1, 2, 3]                                       # type: ignore
-# False
 
-[1] < [1, 2]                                                # type: ignore
-# True
 
-a = [1, 2, 3]
-b = [1, 2, 3]
-print(a is a) # True
-b is a                                                      # type: ignore
-# False
-b == a                                                      # type: ignore
-# True
+
+# DICTIONARY COMPREHENSION (Hecho con Gemini IA)
+# {clave : valor    for     elemento in iterable}
+# Ejemplo 1: Cuadrados (versión Diccionario)
+# Queremos un diccionario donde la clave sea el número y el valor sea su cuadrado.
+
+# {clave : valor ... }
+cuadrados_dict = {i: i**2 for i in range(5)}
+print(cuadrados_dict)
+# Salida: {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+
+
+# ejemplo 2: Creando diccionarios desde dos listas (con zip)
+# nota: vemos 'ZIP' mas adelante
+
+nombres = ['Ana', 'Carlos', 'Beatriz']
+edades = [25, 30, 22]
+# Usamos zip para unir ambos iterables
+agenda = {nombre: edad for nombre, edad in zip(nombres, edades)}
+print(agenda)
+# Salida: {'Ana': 25, 'Carlos': 30, 'Beatriz': 22}
+
+
+# Ejemplo 3: Filtrado con if (Condicional al final)
+precios = {'leche': 120, 'pan': 45, 'manzana': 30, 'carne': 200}
+# Filtramos: Solo guardamos si el precio es menor a 50
+ofertas = {k: v for k, v in precios.items() if v < 50}
+print(ofertas)
+# Salida: {'pan': 45, 'manzana': 30}
+
+
+# ejemplo 4: Modificación de Valores con if/else
+palabras = ['Python', 'es', 'genial', 'si']
+clasificacion = {p: ("Larga" if len(p) > 3 else "Corta") for p in palabras}
+print(clasificacion)
+# Salida: {'Python': 'Larga', 'es': 'Corta', 'genial': 'Larga', 'si': 'Corta'}
+
+
+# ejemplo 5: Transformación de Claves (Keys) A MAYUSCULAS
+datos = {'nombre': 'Juan', 'ciudad': 'Madrid'}
+datos_mayus = {k.upper(): v for k, v in datos.items()}
+print(datos_mayus)
+# Salida: {'NOMBRE': 'Juan', 'CIUDAD': 'Madrid'}
+
+''' !!!
+IMPORTANTE 
+En los diccionarios, las CLAVES deben ser UNICAS. 
+Si tu comprensión genera dos claves iguales, la última que se genere SOBRESCRIBIRA a la anterior.
+'''
+
+
+# uso de ZIP
+'''
+Entender zip es fundamental porque es el "pegamento" que usamos constantemente en Python para unir datos.
+Olvida por un momento los archivos comprimidos .zip (como WinRAR o WinZip). En programación Python, la función zip recibe su nombre del cierre (cremallera) de una chaqueta.
+
+La Metáfora del Cierre
+Imagina que tienes dos filas de dientes en un cierre:
+* Fila izquierda: Una lista de Nombres.
+* Fila derecha: Una lista de Apellidos.
+
+Cuando subes el cierre (zip), los dientes se unen uno a uno en pares perfectos. El primer diente de la izquierda con el primero de la derecha, el segundo con el segundo, y así sucesivamente.
+
+Funcionamiento:
+zip() toma dos o más "iterables" (listas, tuplas, etc.) y DEVUELVE UN ITERADOR que genera tuplas con los elementos emparejados por su índice (posición).
+'''
+nombres = ["Ana", "Bob", "Clara"]
+edades = [25, 30, 22]
+# Aplicamos zip
+combinado = zip(nombres, edades)
+# Para ver el resultado, lo convertimos a lista
+print(list(combinado)) # [('Ana', 25), ('Bob', 30), ('Clara', 22)]
+
+'''
+notas importantes: 
+1) Si intentas unir dos listas de tamaños diferentes, zip dejará de funcionar en cuanto se acabe la lista más pequeña. Los elementos sobrantes de la lista larga simplemente se ignoran.
+2) Puedes unir más de dos listas. No estás limitado a pares. Puedes hacer un "zip" de 3, 4 o más listas a la vez.
+'''
+
+
+
+
+
+
+# SET COMPREHESION 
+# (lo puse en esta parte del apunte por cuestiones de que esta bueno saber LIST y DICT COMPREHESION antes)
+# hecho con Gemini IA
+'''
+Es muy parecida a lo que ya vimos en dict y list comprehesion
+pero tiene un "superpoder" especial: Elimina duplicados automáticamente
+
+Sintaxis Básica: Usa llaves { } como los diccionarios. Pero NO usa dos puntos : (clave:valor), se ve como una lista por dentro.
+
+{ expresion  for  elemento  in  iterable }
+
+ELIMINA AUTOMATICAMENTE DUPLICADOS 
+En Python, un set (conjunto) es una colección desordenada de elementos únicos. Si intentas meter el mismo valor dos veces, el conjunto simplemente ignora el segundo.
+'''
+# Ejemplo: Limpiando una lista de números repetidos
+# Imagina que tienes una lista de una encuesta y la gente respondió varias veces lo mismo.
+respuestas = [10, 20, 10, 30, 20, 40, 10]
+# Creamos el set
+unicos = {n for n in respuestas}
+print(unicos)
+# Salida: {40, 10, 20, 30}
+''' Nota: el orden de salida no está garantizado (los sets son desordenados)
+
+Ejemplo Práctico: Normalización de Texto
+Este es el caso de uso más común. Tienes una lista de palabras escritas de formas distintas (mayúsculas/minúsculas) y quieres saber cuántas palabras únicas hay realmente.
+'''
+frutas = ["Manzana", "manzana", "PERA", "Pera", "pera", "Uva"]
+# Convertimos todo a minúscula dentro del set comprehension
+frutas_unicas = {f.lower() for f in frutas}
+print(frutas_unicas)
+# Salida: {'manzana', 'pera', 'uva'}
+
+
+'''Filtrado con if: puedes filtrar antes de agregar al conjunto.'''
+# Queremos los cuadrados de los números, pero SOLO si el cuadrado es menor a 100
+# y queremos evitar repetidos si la lista original los tuviera.
+numeros = [2, 5, 2, 12, 5, 8] # Hay repetidos
+cuadrados_bajos = {n**2 for n in numeros if n**2 < 100}
+print(cuadrados_bajos)
+# Salida: {64, 25, 4}
+# (4 viene del 2, 25 viene del 5, 64 viene del 8. El 144 del 12 se filtró).
+
+
+
+# nota: no existe 'tuple/tupla comprehension'
+ 
+
+
+
+
 
 # ////////
 if (1, 2): 
@@ -1144,6 +1335,7 @@ if (1, 2):
 # python considera cumplido el IF si lo que esta dentro NO es None
 # (eso en caso de que NO HAYA CONDICIONALES)
 # ////////
+
 
 
 
@@ -1300,6 +1492,11 @@ print(objeto_.__class__.__name__) # imprime Clase_
 # imprimir atributos y metodos de una clase
 print(objeto_.__dict__) # imprime diccionario de atributos
 print(objeto_.__dir__()) # imprime lista con todos los metodos
+
+# Ejemplo con Clase definida mas arriba
+print('producto1.__dict__: \n',producto1.__dict__) # imprime diccionario de atributos
+print('producto1.__dir__(): \n',producto1.__dir__()) # imprime lista con todos los metodos
+
 
 # forma de saber si un objeto es instancia de una clase especifica 
 # usando isinstance
