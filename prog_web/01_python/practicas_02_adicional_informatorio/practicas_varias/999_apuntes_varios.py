@@ -1323,7 +1323,7 @@ print(cuadrados_bajos)
 
 
 # nota: no existe 'tuple/tupla comprehension'
-
+ 
 
 
 
@@ -1492,6 +1492,11 @@ print(objeto_.__class__.__name__) # imprime Clase_
 # imprimir atributos y metodos de una clase
 print(objeto_.__dict__) # imprime diccionario de atributos
 print(objeto_.__dir__()) # imprime lista con todos los metodos
+
+# Ejemplo con Clase definida mas arriba
+print('producto1.__dict__: \n',producto1.__dict__) # imprime diccionario de atributos
+print('producto1.__dir__(): \n',producto1.__dir__()) # imprime lista con todos los metodos
+
 
 # forma de saber si un objeto es instancia de una clase especifica 
 # usando isinstance
