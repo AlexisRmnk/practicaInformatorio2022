@@ -1406,6 +1406,32 @@ funcion01()
 
 
 
+# ASSERT
+# assert es como un punto de control de sanidad o un "autochequeo" que pones en tu código
+# sintaxis:
+'assert condicion, "Mensaje de error opcional"'
+
+# ejemplo:  Comprobando logica interna de programa con descuentos.
+# Segun mi logica, el descuento nunca debe ser negativo ni mayor al 100% (1.0)
+
+def aplicar_descuento(precio, descuento):
+    # Aseguramos que el descuento sea lógico antes de calcular
+    assert 0 <= descuento <= 1, f"El descuento {descuento} es imposible (debe estar entre 0 y 1)"
+    
+    precio_final = precio * (1 - descuento)
+    return precio_final
+
+# Caso correcto
+print(aplicar_descuento(100, 0.2))  # Salida: 80.0
+
+# Caso que rompe la lógica (lanza AssertionError)
+print(aplicar_descuento(100, 1.5))  # El programa se detiene aquí.
+
+# Importante: assert está diseñado para encontrar errores del programador (bugs), no errores del usuario. Se usa para debugging o chequear cuestiones internas.
+
+# si lo que queremos es, en cambio, chequear si el usuario puso un dato mal o manejar errores en produccion, usamos 'if ... raise'
+
+
 
 # 
 # POO
