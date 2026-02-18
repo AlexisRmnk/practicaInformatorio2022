@@ -185,3 +185,15 @@ for nombre, valor in copia_de_globals:
 
 
 
+
+# practica uso pandas
+import pandas
+
+
+
+
+
+
+
+
+
