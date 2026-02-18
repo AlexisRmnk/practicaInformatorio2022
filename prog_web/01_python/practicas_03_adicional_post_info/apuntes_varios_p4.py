@@ -139,3 +139,49 @@ print(f'x vale {x}')
 ########################################################################################
 ########################################################################################
 
+# bloque de codigo que te dice las funciones, variables etc que hay en tu py:
+
+import types
+
+print(f"{'NOMBRE':<25} | {'TIPO':<20} | {'VALOR/ORIGEN'}")
+print("-" * 70)
+
+x = 'a'
+
+listaa = list()
+
+# CORRECCIÓN: Usamos list() para crear una copia estática de los ítems
+# Así, si el diccionario global cambia durante el bucle, no afecta nuestra lista.
+copia_de_globals = list(globals().items())
+
+for nombre, valor in copia_de_globals:
+    
+    # Omitimos las variables internas (las que empiezan con __)
+    if nombre.startswith("__"):
+        continue
+    
+    # Omitimos la variable de la copia misma para no ensuciar la lista
+    if nombre == "copia_de_globals":
+        continue
+
+    tipo = "Variable"
+    
+    if isinstance(valor, types.ModuleType):
+        tipo = "Librería (Módulo)"
+    elif isinstance(valor, types.FunctionType):
+        tipo = "Función Usuario"
+    elif isinstance(valor, types.BuiltinFunctionType):
+        tipo = "Función Built-in"
+    elif isinstance(valor, type):
+        tipo = "Clase"
+        
+    # Convertimos el valor a string y lo cortamos si es muy largo para que se vea bien
+    valor_str = str(valor)[:50] 
+    
+    print(f"{nombre:<25} | {tipo:<20} | {valor_str}")
+
+########################################################################################
+########################################################################################
+
+
+
