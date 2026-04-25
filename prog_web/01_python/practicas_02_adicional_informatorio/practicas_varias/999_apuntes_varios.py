@@ -1078,33 +1078,68 @@ pares = [x for x in range(0,101) if x % 2 == 0]
 # ej: todos los cuadrados de los números pares (del 0 al 100)
 pares_cuadrado = [x**2 for x in range(0,101) if x % 2 == 0]
 
-# syntax ( https://www.w3schools.com/python/python_lists_comprehension.asp )
-# newlist = [expression for item in iterable if condition == True]
-# The iterable can be any iterable object, like a list, tuple, set etc.
-# The expression can also contain conditions, not like a filter, but as a way
-#   to manipulate the outcome
 
-# example: Return "orange" instead of "banana":
-fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
-newlist = [x if x != "banana" else "orange" for x in fruits]
-# The expression in the example above says:
-# "Return the item if it is not banana, if it is banana return orange".
 
 
 
 
 # LIST COMPREHESION IF/ELSE (sacado con Gemini IA)
 # Si quieres cambiar el valor basándote en una condición (en lugar de filtrar), la estructura if/else va al principio, dentro de la expresion.
-# [resultado_si_verdadero if condicion else resultado_si_falso for elemento in iterable]
+
+# [ (resultado_si_verdadero if condicion else resultado_si_falso) for elemento in iterable]
+# IMPORTANTE: eso que puse entre parentesis es un operador ternario, no es algo unicamente de la list comprehesion!
 
 # Ejemplo: Etiquetar pares e impares
 numeros = [1, 2, 3]
-etiquetas = ["Par" if n % 2 == 0 else "Impar" for n in numeros]
+etiquetas = [("Par" if n % 2 == 0 else "Impar") for n in numeros]
 print(etiquetas)
 # Salida: ['Impar', 'Par', 'Impar']
 
+# example: Return "orange" instead of "banana":
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+newlist = [(x if x != "banana" else "orange") for x in fruits]
+# The expression in the example above says:
+# "Return the item if it is not banana, if it is banana return orange".
 
 
+# Diferencia entre poner el IF al PRINCIPIO o al FINAL de la list comprehesion:
+'''
+1) El if al final: Filtrado (Excluir elementos)
+Cuando el if va al final, actúa como un filtro (un guardia de seguridad). Le dice a Python: "Solo incluye este elemento en la nueva lista si se cumple esta condición".
+La lista resultante puede ser más corta que la lista original, porque estás descartando elementos.
+'''
+# [ expresión for elemento in iterable if condición ]
+# mini ejemplo:
+precios = [50, 120, 80, 250, 99]
+# Si el precio es mayor a 100, aplicamos descuento (* 0.9). Si no, dejamos el precio original.
+precios_con_descuento = [(p * 0.9 if p > 100 else p) for p in precios]
+
+'''
+ El if...else al principio: Transformación (Operador Ternario)
+Cuando ves el if al principio, en realidad no es parte de la sintaxis exclusiva de la "list comprehension", sino que es la expresión que se va a insertar, utilizando lo que en Python se conoce como un Operador Ternario
+La lista resultante tendrá exactamente la misma longitud que la original, porque no estás descartando elementos; solo estás decidiendo qué valor poner en cada posición.
+'''
+# [ (valor_si_true if condición else valor_si_false) for elemento in iterable ]
+# ejemplo 
+palabras = ["árbol", "casa", "auto", "perro", "avión"]
+# Nos quedamos con la palabra solo si empieza con 'a' o 'á'
+palabras_con_a = [palabra for palabra in palabras if palabra.lower().startswith('a') or palabra.lower().startswith('á')]
+
+# ejemplo combinando ambas cosas
+# -999 es un error de lectura del sensor
+temperaturas = [25, 35, -999, 15, 42, -999, 10]
+# 1. Filtramos: ignoramos los -999 (if t > -50)
+# 2. Transformamos: etiquetamos las que pasaron el filtro ("Calor" if t > 30 else "Agradable/Frío")
+etiquetas_clima = [("Calor" if t > 30 else "Agradable/Frío") for t in temperaturas if t > -50]
+# esto se lee asi: arrancamos por el medio de la oracion:
+"Para cada temperatura (a la que llamaremos t) dentro de la lista temperaturas..." 
+# sigue por el final de la oracion
+"...siempre y cuando esa temperatura t sea mayor a -50..."
+# y termina por el principio de la oracion:
+"...agrega a la nueva lista la palabra 'Calor' si t es mayor a 30, o agrega 'Agradable/Frío' de lo contrario."
+
+# es decir:
+"Para cada temperatura en la lista, si la temperatura es mayor a -50, entonces: pon 'Calor' si supera los 30 grados, o pon 'Agradable/Frío' si no los supera"
 
 
 
