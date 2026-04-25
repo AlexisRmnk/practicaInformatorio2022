@@ -178,6 +178,16 @@ elif(condicion_falsa):
     print("...")
 
 
+# Operador ternario
+# It checks whether a given condition is True or False and returns one of two values in a single line of code.
+# syntax:
+'value_if_true if condition else value_if_false'
+
+is_tasty = True
+food = "Delicious" if is_tasty else "Not Delicious"
+print(food)
+
+
 # REPETITIVAS
 # Cada conjunto de instrucciones a ejecutar se denomina BUCLE.
 #  Y cada repetición del bucle se llama ITERACIÓN

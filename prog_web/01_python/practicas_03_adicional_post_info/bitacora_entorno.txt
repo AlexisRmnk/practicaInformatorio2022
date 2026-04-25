@@ -1,0 +1,13 @@
+[TO-DO]
+
+Voy anotando como setee mi entorno en windows 11. despues de instalar python:
+
+1) descargue java (necesario para pyspark) elegi Temurin V 17 https://adoptium.net/es
+
+2) seguimos esta guia https://pipenv.pypa.io/en/latest/installation.html 
+
+3) hago desde la consola: py -m pip install pipenv
+
+4) [TO-DO]Sigo desde aca https://pipenv.pypa.io/en/latest/installation.html#on-windows
+
+
