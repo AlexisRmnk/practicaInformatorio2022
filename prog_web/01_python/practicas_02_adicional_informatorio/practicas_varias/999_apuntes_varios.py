@@ -643,7 +643,16 @@ saved for later use.
 sum = lambda x, y: x + y
 print(sum(2, 3))  # Output: 5
 
+'''
+La estructura siempre es exactamente la misma y tiene tres partes:
+lambda parámetros: lo_que_devuelve
 
+El truco infalible para leerla en tu cabeza (o en voz alta) es traducir la sintaxis a palabras normales:
+
+La palabra "lambda" se lee como: "Una función que recibe..."
+Luego lees el nombre de tu parámetro (o parámetros).
+Los dos puntos (:) se leen como: "...y devuelve..." (o "...y su resultado es...").
+'''
 
 # ejemplo de practica mio
 def su_suma_es_par(numero1,numero2):

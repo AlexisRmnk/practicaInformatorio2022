@@ -246,6 +246,16 @@ for i in filter(None, range(-5, 5, 1)):
 # Saltea el 0. Esto supongo que es porque el filtro lo considera FALSE directamente
 
 
+# Así es como filter piensa por dentro (simplificado):
+def mi_filter_casero(funcion, lista):
+    resultados = []
+    for elemento in lista:
+        if funcion(elemento) == True:
+            resultados.append(elemento)
+    return resultados
+
+
+
 # copiar un diccionario de forma correcta
 dict1 = {0: "0", 1:"1", 2:"2"}
 dict1_copy = dict1.copy()
