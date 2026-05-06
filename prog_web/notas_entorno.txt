@@ -1,0 +1,23 @@
+2026-04-05 
+para el entorno usaremos env
+
+'env' viene instalado con python 
+
+comandos a ejecutar
+1) 
+# Sintaxis: python -m venv <nombre_del_entorno>
+> python -m venv .venv
+
+2) > venv\Scripts\activate.bat , ejecutar eso con cmd para activar el entorno
+
+3) Una vez activado el entorno, ya puedes instalar lo que necesites sin miedo a romper otras cosas en tu computadora.
+	# Ejemplo: instalar requests y pandas
+	> pip install requests pandas
+	
+4) Guardar tus Dependencias (para compartir el proyecto o crear un "inventario" de las librerías exactas y sus versiones 
+	> pip freeze > requirements.txt	
+	
+	Esto crea un archivo de texto llamado requirements.txt. Si otro programador (o tú mismo en otra computadora) descarga tu proyecto, solo tiene que crear su propio venv, activarlo y correr: pip install -r requirements.txt para replicar exactamente tu entorno.
+	
+5) desactivacion 
+	> deactivate
