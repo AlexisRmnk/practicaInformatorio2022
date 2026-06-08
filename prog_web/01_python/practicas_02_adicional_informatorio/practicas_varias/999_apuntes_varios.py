@@ -72,7 +72,7 @@ elemento_1 = lista_1[1]
 #tupla
 tupla = ("alpha", "beta", 1, True) #como una lista pero NO modificable
 
-# diccionario - trabajan con LLAVES en vez de indices
+# diccionario - trabajan con LLAVES (KEYS) en vez de indices
 diccionarioTest = {
     "Y": "ypsilon" ,
     "cadena": "valor cadena",
@@ -346,7 +346,7 @@ def funcion4(x):
     respuesta2 = x * x
     return respuesta1, respuesta2
 x = 3
-r1, r2 = funcion4(x)
+r1, r2 = funcion4(x) # 'desempaquetado'
 print(f"{x} + {x} = {r1}")
 print(f"{x} * {x} = {r2}")
 
@@ -356,14 +356,14 @@ print(f"{x} * {x} = {r2}")
 # En este ejemplo paso la funcion 'condicion' que permite 
 # filtrar en otra funcion segun alguna condicion 'x'.
 # https://www.youtube.com/watch?v=YgXnSWG2_AY&list=PLF8hyxwQo59jdYDjY4dpseCdsANSakqT3&index=13
-def filtro(numeros, condicion):
+def filtro(numeros, condicion:function):
     '''
         Toma una lista de numeros como primer parametro y una funcion 
         de condicion para el filtro en el segundo parametro.
     '''
     resultado = list()
     for numero in numeros:
-        if condicion(numero):
+        if condicion(numero): 
             resultado.append(numero)
     return resultado
 
@@ -384,10 +384,10 @@ print( filtro(numeros,es_negativo) )
 # que hay que transformarlo en lista para ver su resultado.
 # solo que tiene un orden de parametros distintos, pasar primero la funcion!
 
-filtro_1 =  filter(numeros, es_par)
+filtro_1 =  filter(es_par, numeros)
 print( list(filtro_1) , end='\n\n')
 
-filtro_2 = filter(numeros, es_negativo)
+filtro_2 = filter(es_negativo, numeros)
 print(list(filtro_2))
 
 
@@ -413,6 +413,9 @@ def indet_posicion(*args):
 
 lista_x1 = [1, 2,["a","b"], 4]
 indet_posicion(*lista_x1)
+# ese * le indica a la funcion que tome cada elemento de la lista lista_x1 y lo pase como un argumento independiente a la funcion
+# es decir, es como si hubieramos escrito: indet_posicion(1, 2, ["a","b"], 4)
+# es una operacion de desempaquetado (unpacking) de la lista.
 
 # 2) por nombre
 def indet_nombre(**kwargs):
@@ -435,14 +438,24 @@ def funcion_argumentos(
     **kwargs_indeterminados_por_nombre
 ):
     print(argumento1, ' | ', argumento2)
+
+    print("args_indeterminados_por_posicion: ")
     for arg in args_indeterminados_por_posicion:
-        print(arg)
-    print(arg_defecto_1, arg_defecto_2)
+        print(arg, end='')
+        if arg != args_indeterminados_por_posicion[-1]: # para no imprimir el '|' despues del ultimo argumento
+            print(' | ', end='')
+        else:
+            print() # para hacer un salto de linea al final 
+
+    print("args por defecto: ") 
+    print(arg_defecto_1, ' | ', arg_defecto_2)
+
+    print("kwargs_indeterminados_por_nombre: ")
     for key,value in kwargs_indeterminados_por_nombre.items():
         print('key: ',key,' | value: ',value)
 
 
-funcion_argumentos('arg1', 'arg2', 1, 2, 3, 4, 5, arg_defecto_2='No es una manzana',
+funcion_argumentos('arg1', 'arg2', 1, 2, 3, 4, 5, arg_defecto_2='(No es una manzana)',
                    uno=1, dos=2, tres=3)
 
 ###############################################################################
@@ -577,9 +590,9 @@ def suma2(a:int|float, b:int|float) -> int|float:
 # usamos ''' para hacer comentarios de ayuda
 def suma3(a:int, b:int) -> int:
     '''
-    COMENTARIO: suma 2 valores a y b
+    COMENTARIO: suma 2 valores: a y b
     '''
-    return a+b
+    return a + b
 
 
 # tambien podemos usar un ALIAS para los tipos. Ej: listas anidadas de enteros
@@ -639,7 +652,7 @@ in situations where a named function would be overkill, or where a
 function is needed for a short period of time and doesn't need to be
 saved for later use.
 '''
-# syntax:   lambda arguments: expression
+# syntax:   lambda <parameters>: <expression>
 sum = lambda x, y: x + y
 print(sum(2, 3))  # Output: 5
 
@@ -672,7 +685,10 @@ print('lmbd (2 + 1) es par?', lmbd_suma_par(2,1))
 print('lmbd (3 + 3) es par?', lmbd_suma_par(3,3))
 print('lmbd (4 + 3) es par?', lmbd_suma_par(4,3))
 print('lmbd (5 + 1) es par?', lmbd_suma_par(5,1))
-# esto NO ES UNA BUENA PRACTICA, ya que para hacer funciones asi usariamos 'def'
+# usar asi la funcion lambda NO ES UNA BUENA PRACTICA,
+# ya que para hacer funciones asi usariamos 'def'
+# las lambdas se usan mas para pasar funciones como argumentos a otras funciones, 
+# o para escribir funciones muy simples de forma rapida sin necesidad de nombrarlas.
 
 
 # ejemplo y explicaciones, hecho con IA Gemini:
@@ -721,7 +737,7 @@ Si no pudieras pasar funciones como argumentos, tendrías que escribir una funci
 # Objetivo: Obtener solo los números pares de una lista.
 
 numeros = [1, 2, 3, 4, 5, 6]
-# Sin lambda tendrías que definir una función aparte
+# Sin lambda tendrías que definir una función aparte (def es_par(x): ...)
 pares = list(filter(lambda x: x % 2 == 0, numeros))
 print(pares) # [2, 4, 6]
 
@@ -748,7 +764,7 @@ print(productos_ordenados)
 # Objetivo: Encontrar la palabra más larga.
 palabras = ["python", "sol", "elefante", "pez"]
 
-# Si usamos max normal, devolvería 'sol' (por orden alfabético)
+# Si usamos max normal, devolvería 'sol' (por orden alfabético de la primera letra):
 # Pero queremos por longitud:
 palabra_larga = max(palabras, key=lambda p: len(p))
 
