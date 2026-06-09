@@ -880,6 +880,11 @@ lista_nueva.extend(lista_larga)
 # crea una lista nueva con los elementos 2, 3 y 4 de otra lista
 lista_nueva4 = lista_nueva[2:5] #tambien se usa [:2] [2:] [:] 
 
+# nota: el slicing tiene un intervalo cerrado por izquierda y abierto por derecha 
+# es decir:
+lista = [0,1,2,3,4,5]
+print(lista[1:4]) # devuelve [1,2,3]
+
 # listas anidadas
 lista_z = [1, ["a", "b", "c"], 3, 4]
 
