@@ -69,7 +69,7 @@ def medir_tiempo(funcion_original): # 1. Recibe la función original (ej: dormir
     
     # 2. Definimos el mensajero (wrapper). 
     # Acepta los argumentos que iban dirigidos a la función original.
-    def wrapper(*args, **kwargs): # NOTE Alexis: esto serian los argunmentos de la funcion que estoy decorando, se usa esta forma para que sea bien general la cosa!
+    def wrapper(*args, **kwargs): # NOTE Alexis: esto serian los argumentos de la funcion que estoy decorando, se usa esta forma para que sea bien general la cosa!
         
         # PASO A: Lógica ANTES de la función real
         inicio = time.time()  
@@ -143,52 +143,41 @@ print(f'x vale {x}')
 
 import types
 
-print(f"{'NOMBRE':<25} | {'TIPO':<20} | {'VALOR/ORIGEN'}")
-print("-" * 70)
+def mostrar_datos_global():
+    print(f"{'NOMBRE':<25} | {'TIPO':<20} | {'VALOR/ORIGEN'}")
+    print("-" * 70)
 
-x = 'a'
+    # Usamos list() para crear una copia estática de los ítems
+    # Así, si el diccionario global cambia durante el bucle, no afecta nuestra lista.
+    copia_de_globals = list(globals().items())
 
-listaa = list()
-
-# CORRECCIÓN: Usamos list() para crear una copia estática de los ítems
-# Así, si el diccionario global cambia durante el bucle, no afecta nuestra lista.
-copia_de_globals = list(globals().items())
-
-for nombre, valor in copia_de_globals:
-    
-    # Omitimos las variables internas (las que empiezan con __)
-    if nombre.startswith("__"):
-        continue
-    
-    # Omitimos la variable de la copia misma para no ensuciar la lista
-    if nombre == "copia_de_globals":
-        continue
-
-    tipo = "Variable"
-    
-    if isinstance(valor, types.ModuleType):
-        tipo = "Librería (Módulo)"
-    elif isinstance(valor, types.FunctionType):
-        tipo = "Función Usuario"
-    elif isinstance(valor, types.BuiltinFunctionType):
-        tipo = "Función Built-in"
-    elif isinstance(valor, type):
-        tipo = "Clase"
+    for nombre, valor in copia_de_globals:
         
-    # Convertimos el valor a string y lo cortamos si es muy largo para que se vea bien
-    valor_str = str(valor)[:50] 
-    
-    print(f"{nombre:<25} | {tipo:<20} | {valor_str}")
+        # Omitimos las variables internas (las que empiezan con __)
+        if nombre.startswith("__"):
+            continue
+        
+        # Omitimos la variable de la copia misma para no ensuciar la lista
+        if nombre == "copia_de_globals":
+            continue
 
-########################################################################################
-########################################################################################
+        tipo = "Variable"
+        
+        if isinstance(valor, types.ModuleType):
+            tipo = "Librería (Módulo)"
+        elif isinstance(valor, types.FunctionType):
+            tipo = "Función Usuario"
+        elif isinstance(valor, types.BuiltinFunctionType):
+            tipo = "Función Built-in"
+        elif isinstance(valor, type):
+            tipo = "Clase"
+            
+        # Convertimos el valor a string y lo cortamos si es muy largo para que se vea bien
+        valor_str = str(valor)[:50] 
+        
+        print(f"{nombre:<25} | {tipo:<20} | {valor_str}")
 
-
-
-
-# practica uso pandas
-import pandas
-
+mostrar_datos_global()
 
 
 

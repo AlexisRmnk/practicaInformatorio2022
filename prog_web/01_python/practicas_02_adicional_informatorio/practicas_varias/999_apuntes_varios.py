@@ -1130,10 +1130,10 @@ Cuando el if va al final, actúa como un filtro (un guardia de seguridad). Le di
 La lista resultante puede ser más corta que la lista original, porque estás descartando elementos.
 '''
 # [ expresión for elemento in iterable if condición ]
-# mini ejemplo:
-precios = [50, 120, 80, 250, 99]
-# Si el precio es mayor a 100, aplicamos descuento (* 0.9). Si no, dejamos el precio original.
-precios_con_descuento = [(p * 0.9 if p > 100 else p) for p in precios]
+# ejemplo:
+palabras = ["árbol", "casa", "auto", "perro", "avión"]
+# Nos quedamos con la palabra solo si empieza con 'a' o 'á'
+palabras_con_a = [palabra for palabra in palabras if palabra.lower().startswith('a') or palabra.lower().startswith('á')]
 
 '''
  El if...else al principio: Transformación (Operador Ternario)
@@ -1141,10 +1141,10 @@ Cuando ves el if al principio, en realidad no es parte de la sintaxis exclusiva 
 La lista resultante tendrá exactamente la misma longitud que la original, porque no estás descartando elementos; solo estás decidiendo qué valor poner en cada posición.
 '''
 # [ (valor_si_true if condición else valor_si_false) for elemento in iterable ]
-# ejemplo 
-palabras = ["árbol", "casa", "auto", "perro", "avión"]
-# Nos quedamos con la palabra solo si empieza con 'a' o 'á'
-palabras_con_a = [palabra for palabra in palabras if palabra.lower().startswith('a') or palabra.lower().startswith('á')]
+# mini ejemplo:
+precios = [50, 120, 80, 250, 99]
+# Si el precio es mayor a 100, aplicamos descuento (* 0.9). Si no, dejamos el precio original.
+precios_con_descuento = [(p * 0.9 if p > 100 else p) for p in precios]
 
 # ejemplo combinando ambas cosas
 # -999 es un error de lectura del sensor
@@ -1234,6 +1234,14 @@ valor = diccionario.pop("clave") #si no existe la clave devuelve ERROR
 # por ello podemos usar mejor un mensaje predeterminado por si no existe clave
 valor = diccionario.pop("clave", "No existe la clave 'clave' ")
 
+#e jemplo de esto ultimo
+diccionario4 = {'clave' : "valor_d4"}
+valor = diccionario4.pop("clave", "No existe la clave 'clave' ")
+print(valor)
+valor = diccionario4.pop("clave", "No existe la clave 'clave' ")
+print(valor)
+
+
 # vaciar diccionario
 diccionario.clear()
 
@@ -1248,8 +1256,8 @@ print(diccionario1) # {'a': 1, 'b': 2, 'c': 30, 'd': 40, 'e': 50}
 d = diccionario1.copy()
 x1 = d.keys(); x2 = d.values(); x3 = d.items(); x4 = len(d)
 # es importante destacar x1, x2 y x3
-# estos metodos generan VISTAS. Es decir, si modificamos el 
-# diccionario 'd', las vistas reflejaran dichos cambios!
+# estos metodos generan VISTAS DE DICCIONARIO (ese es el nombre oficial).
+# Es decir, si modificamos el diccionario 'd', las vistas reflejaran dichos cambios!
 # para guardar los valores en un momento dado se puede usar list() o tuple()
 # ej:
 print(x1) # dict_keys(['a', 'b', 'c'])
@@ -1265,7 +1273,38 @@ print(x4) # sigue siendo 3 (NO ES UNA VISTA)
 # nota: para copiar el valor de estas 'vistas' podemos meterlos en una lista nueva por ej
 lista_claves = list(d.keys()) # x1
 
+# Cómo saber si algo es una vista o no? (Hecho con Gemini IA)
+''' 
+No hay una función mágica como is_view(), pero puedes guiarte por estas 
+reglas infalibles para identificarlo rápidamente:
 
+1. LOS TIPOS PRIMITIVOS NUNCA SON VISTAS:
+   Si una función devuelve un número (int, float), un booleano (bool) o un 
+   texto (str), jamás será una vista. Es un valor estático independiente.
+   Ej: len(d) devuelve un simple número entero.
+
+2. REVISA EL TIPO DE OBJETO CON type():
+   Las vistas tienen nombres de clase muy específicos que delatan su naturaleza.
+'''
+type(d.keys())       # <class 'dict_keys'> (¡ES UNA VISTA!)
+type(list(d.keys())) # <class 'list'> (ES UNA COPIA INDEPENDIENTE)
+
+'''
+3. REGLAS GENERALES EN PYTHON ESTÁNDAR:
+   - Diccionarios: keys(), values() e items() SIEMPRE generan vistas.
+   - Listas / Tuplas / Strings: Al hacer un "recorte" o slice (ej: lista[0:3]), 
+     Python SIEMPRE genera una COPIA nueva. No son vistas.
+
+4. CUIDADO CON LIBRERÍAS DE TERCEROS (NumPy, Pandas):
+   A diferencia del Python estándar, en librerías matemáticas como NumPy, hacer 
+   recortes (slicing) de un array SÍ genera vistas por defecto para ahorrar memoria.
+
+★ REGLA DE ORO:
+Si necesitas "congelar" los datos devueltos por una vista en un momento exacto 
+del tiempo para que no se vean afectados por futuros cambios en el diccionario, 
+fuerza la creación de una copia pasándola por list() o tuple().
+Ej: mis_claves = list(d.keys())
+'''
 
 
 
@@ -1374,8 +1413,19 @@ respuestas = [10, 20, 10, 30, 20, 40, 10]
 unicos = {n for n in respuestas}
 print(unicos)
 # Salida: {40, 10, 20, 30}
-''' Nota: el orden de salida no está garantizado (los sets son desordenados)
+''' Nota: el orden de salida no está garantizado (los sets son desordenados) '''
+# para ordenar:
+unicos_lista = list(unicos)
+print(unicos_lista)
 
+# forma 1:
+unicos_lista_ordenada1 = sorted(unicos_lista) # pasa la lista como una funcion, lo que devuelve otra lista distinta
+print(unicos_lista_ordenada1)
+# forma 2:
+unicos_lista.sort() # aplica el metodo sobre la misma lista
+print(unicos_lista)
+
+'''
 Ejemplo Práctico: Normalización de Texto
 Este es el caso de uso más común. Tienes una lista de palabras escritas de formas distintas (mayúsculas/minúsculas) y quieres saber cuántas palabras únicas hay realmente.
 '''
@@ -1711,7 +1761,7 @@ class Acuatico:
 class Cocodrilo(Terrestre, Acuatico):
     pass
 # Para aquellos metodos que se repitan en nombre (incluido el __init__),
-# La clase Cocodrilo tomata como prioritaria las que esten definidas mas
+# La clase Cocodrilo tomara como prioritaria a las que esten definidas mas
 # a la izquierda (Ej, en este caso usara las clases de Terrestre)
 
 
