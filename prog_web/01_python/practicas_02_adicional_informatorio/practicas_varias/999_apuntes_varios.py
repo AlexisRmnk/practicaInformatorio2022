@@ -1413,8 +1413,19 @@ respuestas = [10, 20, 10, 30, 20, 40, 10]
 unicos = {n for n in respuestas}
 print(unicos)
 # Salida: {40, 10, 20, 30}
-''' Nota: el orden de salida no está garantizado (los sets son desordenados)
+''' Nota: el orden de salida no está garantizado (los sets son desordenados) '''
+# para ordenar:
+unicos_lista = list(unicos)
+print(unicos_lista)
 
+# forma 1:
+unicos_lista_ordenada1 = sorted(unicos_lista) # pasa la lista como una funcion, lo que devuelve otra lista distinta
+print(unicos_lista_ordenada1)
+# forma 2:
+unicos_lista.sort() # aplica el metodo sobre la misma lista
+print(unicos_lista)
+
+'''
 Ejemplo Práctico: Normalización de Texto
 Este es el caso de uso más común. Tienes una lista de palabras escritas de formas distintas (mayúsculas/minúsculas) y quieres saber cuántas palabras únicas hay realmente.
 '''
@@ -1750,7 +1761,7 @@ class Acuatico:
 class Cocodrilo(Terrestre, Acuatico):
     pass
 # Para aquellos metodos que se repitan en nombre (incluido el __init__),
-# La clase Cocodrilo tomata como prioritaria las que esten definidas mas
+# La clase Cocodrilo tomara como prioritaria a las que esten definidas mas
 # a la izquierda (Ej, en este caso usara las clases de Terrestre)
 
 

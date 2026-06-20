@@ -61,7 +61,26 @@ print((f[0] or f[1] or t[0] or t[1] or f[2]))
 # AND logico devuelve primer obj falso
 print((t[0] and t[1] and f[0] and f[1] and t[2]))
     # imprime 0 (primer objeto falso correpondiente a f[0])
-    
+
+''' 
+¿Por qué está diseñado así?
+Principalmente por optimización de rendimiento. Si tienes una expresión como funcion_rapida() or funcion_muy_lenta(), y la función rápida devuelve algo verdadero, Python no perderá tiempo ni recursos ejecutando la función lenta, porque el resultado global de la condición or ya está garantizado como verdadero.
+
+'''   
+# Ejemplo de uso: Si nombre_usuario está vacío, se asigna "Invitado"
+nombre_usuario = None
+usuario = nombre_usuario or "Invitado"
+
+# Ejemplo de uso: solo imprime el valor si es par y positivo
+def funcion_and(num):
+    resultado = (num % 2 == 0) and (num > 0)
+    if resultado:
+        print(num)
+
+funcion_and(-3)
+funcion_and(2)
+
+
 
 # DESEMPAQUETADO
 # se pueden desempaquetar los objetos iterables
